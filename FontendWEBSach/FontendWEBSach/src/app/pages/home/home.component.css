@@ -1,0 +1,326 @@
+body {
+  font-family: Arial, sans-serif;
+}
+.main-home{
+  margin-left: 4%;
+  margin-right: 4%;
+}
+
+.btn-xt{
+  background-color: rgba(196, 209, 218, 1);
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 15px;
+  z-index: 0;
+}
+
+.img-QC {
+  width: 100px;
+  margin: auto;
+}
+
+.vuidentruong {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  max-width: 100%;
+  height: 370px;
+  display: block;
+  margin: auto;
+}
+
+.img-QC {
+  width: 70%;
+  margin: auto;
+}
+
+
+.img-QC-2 {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  gap: 10px;  /* Điều chỉnh khoảng cách giữa hai hình ảnh */
+}
+
+
+.sachhay{
+  max-width: 44%; /* Giới hạn chiều rộng tối đa cho hình ảnh */
+  width: 100%; /* Đảm bảo hình ảnh chiếm toàn bộ chiều rộng có thể của nó */
+  height: auto; /* Đảm bảo chiều cao tự động điều chỉnh dựa trên chiều rộng */
+  /* display: block; */
+  object-fit: contain; /* Giữ nguyên tỷ lệ của hình ảnh */
+}
+
+.backtoschool {
+  max-width: 29%; /* Giới hạn chiều rộng tối đa cho hình ảnh */
+  width: 100%; /* Đảm bảo hình ảnh chiếm toàn bộ chiều rộng có thể của nó */
+  height: auto; /* Đảm bảo chiều cao tự động điều chỉnh dựa trên chiều rộng */
+  /* display: block; */
+  object-fit: contain; /* Giữ nguyên tỷ lệ của hình ảnh */
+}
+
+/* Logo Bộ Thông Báo Công Thương */
+.bo-tb-logo {
+  width: 200px; /* bạn có thể điều chỉnh kích thước này */
+  margin-bottom: 10px;
+}
+
+.social-icons, .download-icons {
+  display: flex;
+  gap: 10px; /* khoảng cách giữa các icon */
+  margin-bottom: 10px;
+}
+
+.icon-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 5px; /* khoảng cách giữa viền và ảnh */
+}
+
+.icon-btn img {
+  width: 25px; /* kích thước của các icon */
+  height: auto;
+}
+
+
+.highlighted-products-section {
+  width: 100%;
+  border: 1px solid #E9EAEE;
+  border-radius: 5px;
+  background-color:#E9EAEE;
+  margin: 0 40px 0 0px;
+  padding-bottom: 30px;
+  margin-bottom: 40px;
+  /* background-color: #97978D; */
+}
+
+.highlighted-products-section-aut {
+  width: 100%;
+  border: 1px solid #E9EAEE;
+  border-radius: 5px;
+  background-color:#E9EAEE;
+  margin: 0 40px 0 0px;
+  /* padding-bottom: 30px; */
+  margin-bottom: 40px;
+  /* background-color: #97978D; */
+}
+
+.highlighted-title-card {
+  margin-bottom: 10px;
+  background-color: #97978D;
+  border-radius: 5px;
+}
+
+.products-container {
+  display: flex;
+  margin-left: 2%;
+  margin-right: 2%;
+  justify-content: space-between;
+background-color:#E9EAEE;
+}
+
+.product-card {
+  width: calc(25% - 15px);
+  transition: transform 0.3s;
+}
+
+.product-card:hover {
+  transform: scale(1.05);
+}
+
+.product-image {
+  width: 200px;
+  height: 300px;
+  object-fit: cover;
+  margin: auto;
+  margin-top: 10px;
+}
+
+.product-name {
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+.product-price {
+  font-size: 14px;
+  margin-top: 5px;
+  color: #333;
+}
+
+
+.see-more-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  background-color:#E9EAEE;
+}
+
+.btn-xt {
+  cursor: pointer;
+  background-color:#97978D;
+  color: white;
+  width: 150px;
+  margin: auto;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.btn-xt:hover {
+  background-color: #005885;
+}
+
+.Banner-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 40px;
+
+}
+
+#carouselExampleControls {
+  flex: 0 0 70%; /* Chiếm 70% chiều rộng */
+  max-width: 70%;
+  margin-right: 20px;
+  z-index: 0;
+}
+
+.picsum-img-wrapper {
+  width: 100%;
+  overflow: hidden; /* Ẩn phần của ảnh nếu nó vượt ra ngoài chiều cao cố định */
+}
+
+.picsum-img-wrapper img {
+  width: 100%; /* chiếm toàn bộ chiều rộng của container */
+  height: 100%; /* chiếm toàn bộ chiều cao của container */
+  object-fit: cover; /* cắt bớt ảnh để giữ tỷ lệ */
+}
+
+
+
+
+.Banner {
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+}
+
+
+
+/* .Banner > div { */
+  /* flex: 1; Mỗi div chiếm một nửa chiều cao của .Banner */
+  /* display: flex; */
+  /* align-items: center; Căn giữa theo chiều dọc */
+  /* justify-content: center; Căn giữa theo chiều ngang */
+/* } */
+
+/* .Banner > div:first-child {
+  margin-bottom: 15px;
+} */
+.banner-1{
+  height: 50%;
+  margin-bottom: 12px;
+}
+
+.banner-2{
+  height: 50%;
+  margin-top: 12px;
+}
+
+.Banner img {
+  max-width: 100%;
+  max-height: 100%;
+  height: auto;
+  display: block;
+}
+
+.banner-2 img{
+  height: 100%;
+}
+
+.cartegory-right-bottom-item{
+  position: relative;
+  width: calc(24% - 20px);
+  text-align: center;
+  padding: 10px 0;
+  margin: 10px;
+  background-color: #fff;
+  border-radius: 5px;
+
+}
+.cartegory-right-bottom-item:hover{
+  transform: scale(1.03);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+}
+
+.cartegory-right-bottom-item p{
+  font-size: 15px;
+  padding: 0px 12px ;
+  font-weight: 500;
+  text-align: left;
+}
+.cartegory-right-bottom-item h1{
+  font-size: 15px;
+  color: #777;
+  padding: 5px 12px;
+  text-align: left;
+  display: block;
+  display: -webkit-box;
+  line-height: 1.4;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cartegory-right-bottom-item img {
+  position: relative;
+  width: 50%;
+  object-fit: contain;
+  transition: all 0.5s ease-in-out;
+}
+
+.productIMG{
+  height: 60%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.productIMG img {
+  position: relative;
+  max-width: 60%;
+  max-height: 100%;
+  object-fit: contain;
+  transition: all 0.5s ease-in-out;
+}
+
+.product-right-price p{
+  font-size: 15px;
+  font-weight: 500;
+  color: #C92127;
+}
+
+.gg{
+  display: flex;
+  font-size: 15px;
+
+}
+.gg p:nth-child(1){
+  text-decoration: line-through;
+  padding-right: 10px;
+}
+.gg p:nth-child(2){
+  color:#fff;
+  border-radius: 5px;
+  background-color:   #C92127;
+  padding: 0px 5px;
+}
+
+.product-rating{
+  margin-top: -5px;
+}

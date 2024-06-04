@@ -1,0 +1,52 @@
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+  }
+  
+  .modal-content {
+    background: #e9eaee;
+    padding: 20px;
+    width: 50vh;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    margin-bottom: 20px;
+  }
+
+
+.name-content {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.modal-content mat-icon{
+  margin-bottom: -5px;
+}
+
+.bookname-add{
+    margin-bottom: 10px;
+}
+
+.bookname-add input{
+  width: 100%;
+  padding: 5px 40px 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px
+}
+  
+.btn-cancel-apply {
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end; 
+}
+
+.btn-cancel-apply button {
+    margin-left: 10px; 
+}

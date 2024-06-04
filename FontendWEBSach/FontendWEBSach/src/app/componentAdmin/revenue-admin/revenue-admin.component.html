@@ -1,0 +1,67 @@
+<div class="revenue">
+    <div class="form-left">
+       <app-menu></app-menu>
+    </div>
+
+    <div class="form-right">
+        <div class="title">
+          QUẢN LÝ CỬA HÀNG
+        </div>
+        <div class="content">
+            <div class="name-content">
+                 Thống kê doanh thu
+            </div>
+            <hr>
+            <div class="show-info" >
+                <div>
+                    Tổng số sản phẩm:
+                    <p>{{this.totalproduct}}</p>
+                </div>
+                <div>
+                    Tổng số hàng đã bán:
+                    <p>{{this.quantity}}</p>
+                </div>
+                <div>
+                    Doanh thu:
+                    <p>{{this.Doanhthu|number:'1.0-0'}} <sup>đ</sup></p>
+                </div>
+            </div>
+            <hr>
+
+            <div class="form-date">
+                <p>Thống kê theo ngày</p>
+                <div class="date-for-to-btn">
+                    <input type="date" placeholder="Từ ngày">
+                    <input type="date" placeholder="Đến ngày">
+                    <button (click)="exportToExcel()">Xuất Excel</button>
+                </div>
+            </div>
+
+            <table id="table" class="info-table">
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Tên sách</th>
+                        <th>Giá bán</th>
+                        <th>Đã bán</th>
+                        <th>Doanh thu</th>
+                    </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let product of productDetails; let i = index">
+                    <td>{{ i + 1 }}</td>
+                    <td>{{ (product.name) }}</td>
+                    <td>{{ product.unitPrice }}</td>
+                    <td>{{ product.quantitySold|number:'1.0-0' }}</td>
+                    <td>{{ product.totalRevenue |number:'1.0-0'}}</td>
+                  </tr>
+                </tbody>
+                <tfoot>
+
+            </table>
+        </div>
+    </div>
+
+</div>
+
+

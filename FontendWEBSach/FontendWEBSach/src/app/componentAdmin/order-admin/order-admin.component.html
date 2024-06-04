@@ -1,0 +1,66 @@
+<div class="order">
+    <div class="form-left">
+       <app-menu></app-menu>
+    </div>
+
+    <div class="form-right">
+        <div class="title">
+          QUẢN LÝ CỬA HÀNG
+        </div>
+        <div class="content">
+            <div class="name-content">
+                 Đơn hàng chưa hoàn thành
+            </div>
+            <hr>
+            <div class="search-add">
+                <div class="search-container">
+                    <input type="text"  placeholder="Tìm kiếm..." class="search-input">
+                    <button class="search-btn">
+                        <mat-icon class="search-icon" >search</mat-icon>
+                    </button>
+                </div>
+                <div class="add-container">
+                    <button mat-raised-button class="add-btn" routerLink="/OrderNotComplete-admin">Lịch sử đơn hàng</button>
+                </div>
+            </div>
+
+            <table class="info-table">
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Mã đơn hàng</th>
+                        <th>Tên người đặt hàng</th>
+                        <th>Số điện thoại</th>
+                        <th>Ngày đặt hàng</th>
+                        <th>Giá tiền</th>
+                        <th>Trạng thái</th>
+                        <th>Xem chi tiết</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let order of orderData">
+                        <td></td>
+                        <td>{{ order.id }}</td>
+                        <td>{{ order.customerName }}</td>
+                        <td>{{ order.customerName}}</td>
+                        <td>{{ order.orderDate }}</td>
+                        <td>{{ (order.unitPrice) |number:'1.0-0'}} <sup>đ</sup></td>
+                        <td>
+                          <select name="" id="" (change)="handleChange($event,order.customerId,order.description)">
+                              <option value="0">chưa hoàn thành</option>
+                              <option value="1">hoàn thành</option>
+                          </select>
+                          <app-modal-apcept [idcustomer]=" this.idcustomer" [time]="this.time" *ngIf="isModalApceptVisible" (closeModalEvent)="isModalApceptVisible = false"></app-modal-apcept>
+                        </td>
+                        <td>
+                          <!-- /OrderDetail-admin -->
+                            <button mat-icon-button (click)="sendIdTime(order.customerId,order.description)"><mat-icon>remove_red_eye</mat-icon></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+      </div>
+</div>
+
+

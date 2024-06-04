@@ -1,0 +1,136 @@
+<div class="bookadd">
+    <div class="form-left">
+       <app-menu></app-menu>
+    </div>
+
+    <div class="form-right">
+        <div class="title">
+          QUẢN LÝ CỬA HÀNG
+        </div>
+        <div class="content">
+            <div class="name-content">
+                Thêm sách mới
+            </div>
+            <hr>
+
+            <!-- Thêm ảnh -->
+            <div class="imgs-add">
+              <div class="img-add">
+                  <label>Chọn ảnh bìa</label>
+                  <input type="file" class="file-upload" (change)="onSelect($event)" accept="image/*" [(ngModel)]="BookImg.image0">
+              </div>
+              <div class="img-add">
+                  <label>Chọn ảnh 1</label>
+                  <input type="file" class="file-upload" (change)="onSelect($event)" accept="image/*" [(ngModel)]="BookImg.image1">
+              </div>
+              <div class="img-add">
+                  <label>Chọn ảnh 2</label>
+                  <input type="file" class="file-upload" (change)="onSelect($event)" accept="image/*" [(ngModel)]="BookImg.image2">
+              </div>
+              <div class="img-add">
+                  <label>Chọn ảnh 3</label>
+                  <input type="file" class="file-upload" (change)="onSelect($event)" accept="image/*" [(ngModel)]="BookImg.image3">
+              </div>
+          </div>
+
+            <!-- Tên sách -->
+            <div class="bookname-add">
+                <label>Tên sách</label>
+                <input type="text" id="bookNameInput" [(ngModel)]="Books.title">
+            </div>
+
+            <!-- Tác giả và Thể loại -->
+            <div class="aut-cate-add">
+                <div class="author-add">
+                  <div class="group-add">
+                  <label>Tác giả</label>
+                    <button mat-raised-button >Thêm</button>
+                  </div>
+                    <mat-select [(ngModel)]="selectedAuthor">
+                        <mat-option *ngFor="let author of Authors" [value]="author.id">
+                            {{ author.name }}
+                        </mat-option>
+                    </mat-select>
+                </div>
+                <div class="category-add">
+                  <div class="group-add">
+                  <label>Thể loại</label>
+                  <button mat-raised-button >Thêm</button>
+                </div>
+                  <mat-select [(ngModel)]="selectedCategory">
+                    <mat-option *ngFor="let category of Categories" [value]="category.id">{{category.name}}</mat-option>
+                  </mat-select>
+                </div>
+            </div>
+
+            <!-- Nhà xuất bản, Năm xuất bản -->
+            <div class="publish-compant-year">
+                <div class="publish-company">
+                  <div class="group-add">
+                    <label>Nhà xuất bản</label>
+                    <button mat-raised-button >Thêm</button>
+                  </div>
+                    <mat-select [(ngModel)]="selectedSupplier">
+                        <mat-option *ngFor="let supplier of Suppliers" [value]="supplier.id">{{supplier.name}}</mat-option>
+                    </mat-select>
+                </div>
+                <div class="publish-year">
+                    <label>Năm xuất bản</label>
+                    <input type="number" [(ngModel)]="Books.yearSX">
+                </div>
+            </div>
+
+            <!-- Giá và Số lượng -->
+            <div class="price-quantity-add">
+                <div class="price-add">
+                    <label>Giá</label>
+                    <input type="number" [(ngModel)]="Books.unitprice">
+                </div>
+                <div class="quantity-add">
+                    <label>Số lượng</label>
+                    <input type="number" [(ngModel)]="Books.quantity">
+                </div>
+                <div class="pricepercent-add">
+                    <label>Giảm giá</label>
+                    <input type="number" [(ngModel)]="Books.pricepercent">
+                </div>
+            </div>
+
+            <div class="page-dimension-add">
+                <div class="pages-add">
+                    <label>Số trang</label>
+                    <input type="number" [(ngModel)]="Books.pages">
+                </div>
+                <div class="dimensions-add">
+                    <label>Kích thước</label>
+                    <input type="text" [(ngModel)]="BookDetail.dimensions">
+                </div>
+            </div>
+
+            <!-- Trạng thái -->
+            <div class="status">
+                <label>Trạng thái</label>
+                <mat-select [(ngModel)]="Books.available">
+                  <mat-option [value]="true">Còn bán</mat-option>
+                  <mat-option [value]="false">Ngưng bán</mat-option>
+                </mat-select>
+            </div>
+
+            <!-- Mô tả -->
+            <div class="description">
+                <label for="descriptionInput">Mô tả</label>
+                <textarea id="descriptionInput" [(ngModel)]="BookDetail.description"></textarea>
+            </div>
+
+            <!-- Nút Hủy và Áp dụng -->
+            <div class="btn-cancel-apply">
+                <button mat-raised-button routerLink="/admin">Hủy</button>
+                <button mat-raised-button >Xác nhận</button>
+            </div>
+        </div>
+      </div>
+</div>
+
+
+
+

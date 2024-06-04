@@ -1,0 +1,46 @@
+<footer>
+  <div class="footer-bottom"  >
+      <div class="contact-info">
+          <h3>LIÊN HỆ</h3>
+          <p>
+            <mat-icon class="mat-icon-map" >location_on</mat-icon>
+            578 Đường Nguyễn Duy, phường 10, Quận 8, Thành phố Hồ Chí Minh
+        </p>
+
+        <app-map *ngIf="isMapModalVisible" (closeModalEvent)="isMapModalVisible = false"></app-map>
+        <!-- <span class="bold-text">Số điện thoại liên hệ:</span> -->
+        <p>
+            <mat-icon class="mat-icon"> phone</mat-icon>
+            0930 232 555
+        </p>
+        <!-- <span class="bold-text">Mail:</span> -->
+        <p>
+            <mat-icon>mail</mat-icon>
+            kanncskh@gmail.com
+        </p>
+          <div class="social-icons">
+              <button class="icon-btn"><img src="assets/footer/fb-icon.png" alt="Facebook Icon"></button>
+              <button class="icon-btn"><img src="assets/footer/ig-icon.png" alt="Instagram Icon"></button>
+              <button class="icon-btn"><img src="assets/footer/yt-icon.png" alt="YouTube Icon"></button>
+              <button class="icon-btn"><img src="assets/footer/tbl-icon.png" alt="Tumblr Icon"></button>
+              <button class="icon-btn"><img src="assets/footer/t-icon.png" alt="Twitter Icon"></button>
+              <button class="icon-btn"><img src="assets/footer/pr-icon.png" alt="Pinterest Icon"></button>
+          </div>
+      </div>
+
+      <div class="footer-left">
+          <div class="footer-logo">
+              <img src="assets/logo.png" alt="Logo" class="logo">
+          </div>
+          <!-- Signup Text -->
+          <p class="italic-text">Đăng ký nhận bảng tin từ KANN book store</p>
+          <!-- Email Input -->
+          <div class="email-input">
+              <input type="email" placeholder="Nhập mail của bạn...">
+          </div>
+      </div>
+      <div class="footer-right">
+          <img src="assets/footer/logopay.png" alt="Logo Bay" class="pay-logo">
+      </div>
+  </div>
+</footer>

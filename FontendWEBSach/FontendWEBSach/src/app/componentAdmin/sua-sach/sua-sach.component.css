@@ -1,0 +1,194 @@
+.bookfix {
+    display: flex;
+    height: 100vh;
+    margin: 0;
+}
+
+.form-left {
+    flex: 1;
+    flex-direction: column;
+    background-color: #e9eaee;
+    width: 25%;
+    min-height: 100vh;
+    margin-right: 2%;
+    padding: 20px;
+    position: sticky;
+    top: 0;
+    flex-shrink: 0;
+    overflow-y: auto;
+}
+
+.form-right {
+    flex: 4;
+    width: 100%;
+    overflow-y: auto;
+    /* /* margin-right: 5%; */
+    padding-right: 2%;
+}
+
+.title {
+    font-size: 26px;
+    font-weight: bold;
+    margin: 10px 0;
+    text-align: center;
+    color: #97978d;
+}
+
+.content {
+    margin-bottom: 20px;
+    background-color: #e9eaee;
+    padding: 20px;
+}
+
+.name-content {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.img-add {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+/* Hiển thị các ảnh đã chọn */
+.image-preview-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.image-preview {
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.image-preview img {
+    max-width: 100px;
+    max-height: 100px;
+    object-fit: cover;
+    border: 1px solid #ccc;
+}
+
+/* ten sach */
+.bookname-add{
+    margin-bottom: 10px;
+}
+
+.bookname-add input{
+  width: 100%;
+  padding: 5px 40px 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px
+}
+
+/* the loai-tac gia */
+.aut-cate-add {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.aut-cate-add > div {
+    flex: 1;
+}
+
+.author-add{
+    margin-right: 5%;
+}
+
+.aut-cate-add label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.aut-cate-add input {
+    width: 100%;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/* nha xuat ban-nam xuat ban */
+.publish-compant-year {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.publish-compant-year > div {
+    flex: 1;
+}
+
+.publish-company{
+    margin-right: 5%;
+}
+
+.publish-compant-year label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.publish-compant-year input {
+    width: 100%;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/* gia-so luong */
+.price-quantity-add {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.price-quantity-add > div {
+    flex: 1;
+}
+
+.price-add{
+    margin-right: 5%;
+}
+
+.price-quantity-add label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.price-quantity-add input {
+    width: 100%;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.status input{
+    width: calc(50% - 2.5%);
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+textarea {
+  width: 100%;
+  padding: 5px 40px 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px
+}
+
+
+.btn-cancel-apply {
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.btn-cancel-apply button {
+    margin-left: 10px;
+}
+

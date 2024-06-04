@@ -1,0 +1,155 @@
+.order-not-complete {
+    display: flex;
+    height: 100vh;
+    margin: 0;
+}
+
+.form-left {
+    flex: 1;
+    flex-direction: column;
+    background-color: #e9eaee;
+    width: 25%;
+    min-height: 100vh;
+    margin-right: 2%;
+    padding: 20px;
+    position: sticky;
+    top: 0;
+    flex-shrink: 0;
+    overflow-y: auto;
+}
+.show-info {
+  display: flex;
+  justify-content: space-between;
+}
+
+.show-info div {
+  flex: 1;
+  text-align: center;
+  padding: 10px;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin: 0 10px;
+}
+
+.form-right {
+    flex: 4;
+    width: 100%;
+    overflow-y: auto;
+    /* margin-right: 5%; */
+    padding-right: 2%;
+  }
+
+.title {
+    font-size: 26px;
+    font-weight: bold;
+    margin: 10px 0;
+    text-align: center;
+    color: #97978d;
+}
+
+.menu-list mat-icon{
+    margin-bottom: -5px;
+}
+
+.add-container {
+    margin-left: auto;
+}
+.content {
+    margin-bottom: 20px;
+    background-color: #e9eaee;
+    padding: 20px;
+}
+
+.name-content {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.search-add {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.search-container {
+    position: relative;
+    height: 40px;
+    width: 50vh;
+    display: flex;
+}
+
+.search-input {
+    flex: 1;
+    padding: 5px 40px 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.search-btn {
+    background: transparent;
+    border: none;
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.search-icon {
+    height: 20px;
+    padding-right: 8px;
+}
+
+mat-raised-button {
+    color: #97978d;
+}
+
+.info-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.info-table th, .info-table td {
+    border: none;
+    padding: 8px;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.info-table th {
+    background-color: #f2f2f2;
+}
+
+.info-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.info-table tbody tr:nth-child(odd) {
+    background-color: #ffffff;
+}
+
+.mat-icon-button {
+    transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.mat-icon-button:hover {
+    color: #ff4081;
+    transform: scale(1.1);
+}
+
+mat-icon {
+    margin-right: 5px;
+}
+
+.info-table img {
+    width: 45%;
+}
+
+.info-table th input[type="checkbox"],
+.info-table td input[type="checkbox"]{
+    width: 20px; /* Chiều rộng */
+    height: 20px; /* Chiều cao */
+
+}

@@ -1,0 +1,36 @@
+<div class="modal-overlay" (click)="closeModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+        <div class="name-content">
+             Thêm nhân viên
+        </div>
+        <hr>
+        <div class="bookname-add">
+            <label>Tên nhân viên</label>
+            <input type="text" [(ngModel)]="DataStaff.FullName">
+        </div>
+        <div class="bookname-add">
+            <label>Email</label>
+            <input type="email" [(ngModel)]="DataStaff.Email">
+        </div>
+        <div class="bookname-add">
+            <label>Số điện thoại</label>
+            <input type="tel" [(ngModel)]="DataStaff.Phone">
+        </div>
+        <div class="bookname-add">
+            <label>Mật khẩu</label>
+            <input type="password" [(ngModel)]="DataStaff.Password">
+        </div>
+        <div class="bookname-add">
+            <label>Phân quyền</label>
+            <select>
+                <option value="nhanvien">Nhân viên</option>
+                <option value="quanly">Quản lý</option>
+            </select>
+        </div>
+        <div class="btn-cancel-apply">
+            <button mat-raised-button (click)="closeModal()">HUỶ</button>
+            <button mat-raised-button (click)="addStaff()">THÊM</button>
+        </div>
+    </div>
+  </div>
+  

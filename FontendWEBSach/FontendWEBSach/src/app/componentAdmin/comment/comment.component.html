@@ -1,0 +1,92 @@
+<div class="comment">
+    <div class="form-left">
+       <app-menu></app-menu>
+    </div>
+
+    <div class="form-right">
+        <div class="title">
+          QUẢN LÝ CỬA HÀNG
+        </div>
+        <div class="content">
+            <div class="name-content">
+                Bình luận
+            </div>
+            <hr>
+            <div class="search-add">
+                <div class="search-container">
+                    <input type="text"[(ngModel)]="View.title" (input)="loadpro(View.title)"  placeholder="Tìm kiếm..." class="search-input">
+                    <button class="search-btn">
+                        <mat-icon class="search-icon" >search</mat-icon>
+                    </button>
+                </div>
+                <div class="add-container">
+                    <button mat-raised-button class="add-btn">Xoá tất cả</button>
+                </div>
+            </div>
+            <div id="Viewfirst">
+              <table class="info-table">
+                <thead>
+                    <tr>
+                      <!-- //(change)="selectAll($event)" -->
+                        <th><input type="checkbox" ></th>
+                        <th>Tên sách</th>
+                        <th>Bình luận</th>
+                        <th>Người bình luận</th>
+                        <th>Đánh giá</th>
+                        <th>Ngày đăng</th>
+                        <th>Xoá</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let cmt of datacomment">
+                        <td><input type="checkbox"></td>
+                        <td>{{ cmt.bookTitle }}</td>
+                        <td>{{ cmt.comment}}</td>
+                        <td>{{ cmt.customerName}}</td>
+                        <td>{{ cmt.rating }}</td>
+                        <td>{{ cmt.ngayComment | date:'dd/MM/yyyy' }}</td>
+                        <td>
+                            <button mat-icon-button (click)="openDeleteModal()"><mat-icon>delete</mat-icon></button>
+                        </td>
+                        <app-modal-xoa [idReview]="cmt.id" *ngIf="isDeleteModalVisible" (closeModalEvent)="isDeleteModalVisible = false"></app-modal-xoa>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="see-more-container">
+              <ngb-pagination [collectionSize]="this.loadpageReviewCount" (pageChange)="onPageChange($event)" [pageSize]="sizepage" [(page)]="page" aria-label="Default pagination" />
+            </div>
+        </div>
+        <div id="Viewfirst" id="searchview" style="display: none;">
+        <table class="info-table"  >
+          <thead>
+              <tr>
+                  <th>Tên sách</th>
+                  <th>Bình luận</th>
+                  <th>Người bình luận</th>
+                  <th>Đánh giá</th>
+                  <th>Ngày đăng</th>
+                  <th>Xoá</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let cmt of datacommentfull">
+                  <td><input type="checkbox"></td>
+                  <td>{{ cmt.bookTitle }}</td>
+                  <td>{{ cmt.comment}}</td>
+                  <td>{{ cmt.customerName}}</td>
+                  <td>{{ cmt.rating }}</td>
+                  <td>{{ cmt.ngayComment | date:'dd/MM/yyyy' }}</td>
+                  <td>
+                      <button mat-icon-button (click)="openDeleteModal()"><mat-icon>delete</mat-icon></button>
+                  </td>
+                  <app-modal-xoa [idReview]="cmt.id" *ngIf="isDeleteModalVisible" (closeModalEvent)="isDeleteModalVisible = false"></app-modal-xoa>
+              </tr>
+          </tbody>
+      </table>
+      </div>
+            </div>
+
+      </div>
+</div>
+
+

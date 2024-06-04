@@ -1,0 +1,8 @@
+.star-icon {
+    color: gold;
+    cursor: pointer;
+}
+
+.container-start {
+    display: flex;
+}

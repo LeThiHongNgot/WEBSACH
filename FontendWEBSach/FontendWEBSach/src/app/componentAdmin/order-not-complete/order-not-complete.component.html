@@ -1,0 +1,59 @@
+<div class="order-not-complete">
+    <div class="form-left">
+       <app-menu></app-menu>
+    </div>
+
+    <div class="form-right">
+        <div class="title">
+          QUẢN LÝ CỬA HÀNG
+        </div>
+        <div class="content">
+            <div class="name-content">
+                 Lịch sử đơn hàng
+            </div>
+            <hr>
+            <div class="search-add">
+                <div class="search-container">
+                    <input type="text"  placeholder="" class="search-input">
+                    <button class="search-btn">
+                        <mat-icon class="search-icon" >search</mat-icon>
+                    </button>
+                </div>
+                <div class="add-container">
+                    <button mat-raised-button (click)="exportToExcel()" class="add-btn">Xuất File Excel</button>
+                </div>
+            </div>
+
+            <table class="info-table">
+              <thead>
+                  <tr>
+                      <th>STT</th>
+                      <th>Mã đơn hàng</th>
+                      <th>Tên người đặt hàng</th>
+                      <th>Số điện thoại</th>
+                      <th>Ngày đặt hàng</th>
+                      <th>Giá tiền</th>
+                      <th>Trạng thái</th>
+                      <th>Xem chi tiết</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let order of orderData">
+                      <td></td>
+                      <td>{{ order.id }}</td>
+                      <td>{{ order.customerName }}</td>
+                      <td>{{ order.customerName}}</td>
+                      <td>{{ order.orderDate }}</td>
+                      <td>{{ (order.unitPrice) |number:'1.0-0'}} <sup>đ</sup></td>
+                      <td>{{ order.status }}</td>
+                      <td>
+                          <button mat-icon-button (click)="sendIdTime(order.customerId,order.description)"><mat-icon>remove_red_eye</mat-icon></button>
+                      </td>
+                  </tr>
+              </tbody>
+          </table>
+        </div>
+      </div>
+</div>
+
+

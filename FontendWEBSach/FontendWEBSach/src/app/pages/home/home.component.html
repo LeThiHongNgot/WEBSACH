@@ -1,0 +1,88 @@
+<app-header></app-header>
+<div class="main-home">
+  <div class="Banner-container">
+    <div id="carouselExampleControls" class="carousel-slide" data-bs-ride="carousel">
+            <ngb-carousel *ngIf="images">
+                <!-- Banner slider 1 -->
+                <ng-template ngbSlide>
+                    <div class="picsum-img-wrapper">
+                        <img [src]="images[0]" alt="Random first slide" />
+                    </div>
+                </ng-template>
+                <!-- Banner slider 2 -->
+                <ng-template ngbSlide>
+                    <div class="picsum-img-wrapper">
+                        <img [src]="images[1]" alt="Random second slide" />
+                    </div>
+                </ng-template>
+                <!-- Banner slider 3 -->
+                <ng-template ngbSlide>
+                    <div class="picsum-img-wrapper">
+                        <img [src]="images[2]" alt="Random third slide" />
+                    </div>
+                </ng-template>
+            </ngb-carousel>
+        </div>
+        <div class="Banner">
+            <div class = "banner-1">
+                <img src="assets/banner/backtoschool.png" alt="backtoschool">
+            </div>
+            <div class = "banner-2">
+                <img src="assets/banner/moibuaan.jpg" alt="moibuaan">
+            </div>
+        </div>
+        <div style="clear:both;"></div>
+    </div>
+    <!-- San Pham Noi Bat -->
+    <div class="highlighted-products-section">
+        <mat-card class="highlighted-title-card">
+            <mat-card-content style="font-size: 18px; color: #FFF;font-weight: bold;">SẢN PHẨM NỔI BẬT</mat-card-content>
+        </mat-card>
+        <div class="products-container">
+          <div class="cartegory-right-bottom-item" *ngFor="let product of bookfull" (click)="navigateToProduct(product.bookId )">
+            <div class="productIMG" >
+              <img [src]="product.image0">
+            </div>
+              <h1 class=" btn-outline-secondary me-2" placement="top" ngbTooltip={{product.title}}>{{ product.title }}</h1>
+              <p>{{percent1(product.unitPrice,product.pricePercent) | number:'1.0-0'}}<sup>đ</sup></p>
+              <div class="gg">
+                <p class="thoughtline">{{product.unitPrice | number:'1.0-0'}}<sup>đ</sup></p>
+                <p >{{percent2(product.pricePercent)}}</p>
+              </div>
+
+              <div class="product-rating">
+                 <app-rating-decimal [rating]="5"></app-rating-decimal>
+              </div>
+          </div>
+        </div>
+        <div class="see-more-container">
+             <ngb-pagination [collectionSize]="this.lenghtBook" (pageChange)="onPageChange($event)" [pageSize]="pageSize" [(page)]="page" aria-label="Default pagination" />
+        </div>
+    </div>
+    <app-author-card></app-author-card>
+    <!-- Goi y cho ban -->
+    <div class="highlighted-products-section">
+        <mat-card class="highlighted-title-card">
+            <mat-card-content style="font-size: 18px; color: #FFF;font-weight: bold;">GỢI Ý CHO BẠN</mat-card-content>
+        </mat-card>
+        <div class="products-container">
+            <div class="cartegory-right-bottom-item" *ngFor="let product of booksuggest.slice(0, 5)" (click)="navigateToProduct(product.bookId)">
+              <div class="productIMG" >
+                <img [src]="product.image0">
+              </div>
+              <h1 class=" btn-outline-secondary me-2" placement="top" ngbTooltip={{product.title}}>{{ product.title }}</h1>
+              <div class="product-right-price">
+                    <p>{{percent1(product.unitPrice,product.pricePercent) | number:'1.0-0'}}<sup>đ</sup></p>
+              </div>
+              <div class="gg">
+                <p>{{product.unitPrice | number:'1.0-0'}}<sup>đ</sup></p>
+                <p>{{percent2(product.pricePercent)}}</p>
+              </div>
+              <div class="product-rating">
+                <app-rating-decimal [rating]="product.averageRating"></app-rating-decimal>
+              </div>
+            </div>
+        </div>
+      </div>
+</div>
+<app-footer></app-footer>

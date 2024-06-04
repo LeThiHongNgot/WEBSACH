@@ -1,0 +1,22 @@
+
+  <!-- <div class="author-container" *ngFor="let a of authors.slice(0,5)">
+    <div class="author-image">
+      <img [src]="a.image" alt="Author Image" class="author-pic">
+    </div>
+  </div> -->
+
+<div class="highlighted-products-section-aut">
+  <mat-card class="highlighted-title-card">
+      <mat-card-content style="font-size: 18px; color: #FFF;font-weight: bold;">TÁC GIẢ</mat-card-content>
+  </mat-card>
+  <div class="aut-container">
+    <div class="author-container" *ngFor="let a of authors">
+      <div class="author-image">
+        <img [src]="a.image" alt="Author Image" >
+      </div>
+      <div class="text">
+        {{a.name}}
+      </div>
+    </div>
+  </div>
+</div>

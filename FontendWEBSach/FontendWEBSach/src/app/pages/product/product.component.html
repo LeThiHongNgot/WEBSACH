@@ -1,0 +1,180 @@
+<app-header></app-header>
+<div class="product" >
+  <div class="container"*ngIf="productful">
+        <div class="product-content row">
+          <div class="product-left row" >
+            <div class="product-left-big-img">
+              <img [src]="selectedImage || productful.image0" alt="">
+            </div>
+            <div class="product-left-small-img">
+              <img (mouseover)="changeImage(productful.image0)" src="{{productful.image0}}" alt="">
+              <img (mouseover)="changeImage(productful.image1)" src="{{productful.image1}}" alt="">
+              <img (mouseover)="changeImage(productful.image2)" src="{{productful.image2}}" alt="">
+              <img (mouseover)="changeImage(productful.image3)" src="{{productful.image3}}" alt="">
+            </div>
+          </div>
+            <div class="product-right"  >
+              <div class="product-right-name" >
+                <h1>{{ productful.title }}</h1>
+              </div>
+              <div class="product-right-price">
+                <p>{{percent1(productful.unitPrice,productful.pricePercent) | number:'1.0-0'}}<sup>đ</sup></p>
+              </div>
+              <div class="gg">
+                <p>{{ productful.unitPrice | number:'1.0-0' }}<sup>đ</sup></p>
+                <p>{{percent2(productful.pricePercent)}}</p>
+              </div>
+              <div class="product-right-inf">
+                <p>Nhà xuất bản: <span>{{ productful.supplierName}}</span></p>
+                <p>Tác giả: <span>{{ productful.authorName }}</span></p>
+                <p *ngIf="bookdetail">Thể loại: <span>{{productful.categoryName}}</span></p>
+              </div>
+              <div class="quantity">
+                <p style="font-weight: bold;">Số lượng</p>
+                <input type="number" min="0" [max]="this.quantityfirst" [(ngModel)]="productful.quantity" (ngModelChange)="updateQuantity(productful.bookId, productful.quantity)">
+
+              </div>
+              <div class="product-right-button">
+                <button mat-raised-button (click)="addCart()">THÊM VÀO GIỎ HÀNG</button>
+                <button mat-raised-button (click)="payment()">MUA NGAY</button>
+              </div>
+            </div>
+          </div>
+    </div>
+    <div class="container"  >
+        <div class="product-productdetail">
+            <div class="product-title-top" >
+                <p>CHI TIẾT SẢN PHẨM </p>
+            </div>
+            <div class="product-productdetail-bottom" >
+                <div class="product-productdetail-bottom-inf">
+                    <tbody>
+                        <tr>
+                            <th>Nhà xuất bản</th>
+                            <td >{{productful?.supplierName}}</td>
+                        </tr>
+                        <tr>
+                            <th>Tác giả</th>
+                            <td>{{productful?.authorName}}</td>
+                        </tr>
+                        <tr>
+                            <th>Thể loại</th>
+                            <td >{{productful?.categoryName}}</td>
+                        </tr>
+                        <tr>
+                          <th>Số trang</th>
+                          <td >{{productful?.pages}}</td>
+                      </tr>
+                      <tr>
+                        <th>Kích thước</th>
+                        <td >{{productful?.dimensions}}</td>
+                    </tr>
+                    </tbody>
+                </div>
+                <div class="product-productdetail-bottom-detail" >
+                    <p>{{productful?.description}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" >
+        <div class="product-relatedproduct">
+            <div class="product-title-top">
+                <p>SẢN PHẨM LIÊN QUAN </p>
+            </div>
+            <div class="product-relatedproduct-bottom">
+              <!-- <div class="cartegory-right-bottom-item" *ngFor="let bookCid of productSameCategoryID" (click)="navigateToProduct(bookCid.bookId)">
+                <div class="productIMG">
+                  <img [src]="bookCid.image0" alt="">
+                </div>
+                <h1 class=" btn-outline-secondary me-2" placement="top" ngbTooltip={{bookCid.title}}>{{ bookCid.title}}</h1>
+
+                <p>{{ bookCid.unitPrice | number:'1.0-0' }}<sup>đ</sup></p>
+                <div class="product-rating">
+                  <app-rating-decimal [rating]="bookCid.averageRating1 || 0"></app-rating-decimal>
+                </div>
+              </div> -->
+              <div class="cartegory-right-bottom-item" *ngFor="let product of productSameCategoryID"  (click)="navigateToProduct(product.bookId)">
+                <div class="productIMG" >
+                  <img [src]="product.image0">
+                </div>
+                  <h1 class=" btn-outline-secondary me-2" placement="top" ngbTooltip={{product.title}}>{{ product.title }}</h1>
+                  <div class="product-right-price">
+                    <p>{{percent1(product.unitPrice,product.pricePercent) | number:'1.0-0'}}<sup>đ</sup></p>
+                  </div>
+                  <div class="gg">
+                    <p class="thoughtline">{{product.unitPrice | number:'1.0-0'}}<sup>đ</sup></p>
+                    <p >{{percent2(product.pricePercent)}}</p>
+                  </div>
+                  <div class="product-rating">
+                     <app-rating-decimal [rating]="product.averageRating1"></app-rating-decimal>
+                  </div>
+              </div>
+
+              <div class="see-more-container">
+                <ngb-pagination [collectionSize]="this.loadedBooksCount" (pageChange)="onPageChange($event)" [pageSize]="pageSize" [(page)]="page" aria-label="Default pagination" />
+              </div>
+            </div>
+        </div>
+        </div>
+    <div class="container">
+      <div class="product-relatedproduct">
+          <div class="product-title-top">
+              <p>ĐÁNH GIÁ SẢN PHẨM</p>
+          </div>
+          <div class="product-productreview-bottom">
+              <div class="rating">
+                <div class="rating-number" *ngIf="averageRating">
+                  <span>{{averageRating|number:'1.1-1'}}/5</span><br>
+                  <app-star-rating [rating]="averageRating"></app-star-rating>
+                </div>
+                  <div class="rating-progress-bars" >
+                      <div class="rating-progress-bars-star" *ngFor="let a of ratingStatistical" >
+                          <p>{{a.rating}} sao</p>
+                          <ngb-progressbar  class="mb-3" type="warning" textType="dark" [value]="(a.count/this.totalVotes)*100" [showValue]="true" [max]="100" [striped]="true" />
+                      </div>
+
+                  </div>
+                  <div class="rating-btn">
+                      <p>Chỉ có thành viên mới có thể viết nhận xét. Vui lòng <span>đăng nhập</span> hoặc <span>đăng ký</span>.</p>
+                      <ng-template #content let-c="close" let-d="dismiss">
+                          <div class="modal-header">
+                              <h4 class="modal-title" id="modal-basic-title">Đánh giá sản phẩm</h4>
+                              <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
+                          </div>
+                          <div class="modal-body">
+                            <app-rating-decimal [rating]="commemtrating.rating || 0" (ratingChange)="onRatingChange($event)"></app-rating-decimal>
+                            <br>
+                            <label for="typeahead-basic">Viết nhận xét của bạn về sản phẩm</label>
+                            <textarea type="text" class="form-control" [(ngModel)]="commemtrating.comment"></textarea>
+                        </div>
+
+                          <div class="modal-footer">
+                              <button type="button" class="btn btn-outline-dark" (click)="portratingcommen();c('Save click')">Gửi nhận xét</button>
+                          </div>
+                      </ng-template>
+
+                      <button mat-raised-button (click)="open(content)">Viết đánh giá</button>
+                  </div>
+              </div>
+              <div class="comment" *ngFor="let productView of productViewinterface">
+                <table>
+                  <td>
+                    <tr><b>{{ productView.customerName }}</b></tr>
+                    <tr>{{this.formatDate(productView.ngayCommemt) }}</tr>
+                  </td>
+                  <td>
+                    <tr>
+                      <app-star-rating [rating]="productView.rating" ></app-star-rating>
+                    </tr>
+                    <tr><p>{{ productView.comment }}</p></tr>
+                  </td>
+                </table>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

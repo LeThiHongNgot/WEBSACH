@@ -1,0 +1,50 @@
+<div class="user">
+    <div class="form-left">
+       <app-menu></app-menu>
+    </div>
+
+    <div class="form-right">
+        <div class="title">
+          QUẢN LÝ CỬA HÀNG
+        </div>
+        <div class="content">
+            <div class="name-content">
+                Người dùng
+            </div>
+            <hr>
+            <div class="search-add">
+                <div class="search-container">
+                    <input type="text" [(ngModel)]="customer.fullName" placeholder="Tìm kiếm..." class="search-input" (input)="loadpro(customer.fullName !== '' ? customer.fullName : null)">
+                    <button class="search-btn">
+                        <mat-icon class="search-icon" >search</mat-icon>
+                    </button>
+                </div>
+            </div>
+            <table class="info-table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Tên người dùng</th>
+                        <th>Số điện thoại</th>
+                        <th>Email</th>
+                        <th>Xoá</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let user of filterdCustomers.slice(0,25);let i = index">
+                        <td>{{i+1}}</td>
+                        <td>{{ user.fullName }}</td>
+                        <td>{{ user.phone }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>
+                            <button mat-icon-button (click)="openDeleteModal(user.id)"><mat-icon>delete</mat-icon></button>
+                        </td>
+                        <app-modal-xoa *ngIf="isDeleteModalVisible" [idCustomerDelete]="idCustomerDelete" (closeModalEvent)="isDeleteModalVisible = false"></app-modal-xoa>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+      </div>
+</div>
+
+

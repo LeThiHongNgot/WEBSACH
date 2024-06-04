@@ -1,0 +1,41 @@
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+  }
+  
+  .modal-content {
+    background: #fff;
+    padding: 20px;
+    width: 50vh;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    
+  }
+
+.btn-acp {
+    display: flex;
+    flex-direction: row; /* Đặt hướng chính của flexbox là ngang */
+    justify-content: space-around; /* Các phần tử con sẽ được căn giữa và có khoảng trống đều ở giữa */
+    align-items: center; /* Căn giữa theo chiều dọc */
+}
+
+.btn-acp mat-raised-button {
+    width: 100px;
+}
+
+.modal-content mat-icon{
+  margin-bottom: -5px;
+}
+
+.modal-content p{
+  text-align: center;
+}
+  
+  

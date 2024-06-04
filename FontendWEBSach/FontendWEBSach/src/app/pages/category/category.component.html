@@ -1,0 +1,81 @@
+<app-header></app-header>
+<div class="cartegory row">
+    <div class="container ">
+        <div class="cartegory-left">
+            <div class="cartegory-left-top">
+                <i class="fa-thin fa-sort"></i>
+                <p>Bộ lọc</p>
+            </div>
+            <div class="cartegory-left-bottom">
+              <div class="cartegory-left-bottom-price">
+                <p>Giá</p>
+                <mat-radio-group ng-model="data.group1" [value]="Optionprice" (change)="filterProductsByPrice($event.value)">
+                    <mat-radio-button value="">Tất cả</mat-radio-button>
+                    <mat-radio-button value="1" >0đ - 100.000đ</mat-radio-button>
+                    <mat-radio-button value="2"> 100.000đ - 200.000đ</mat-radio-button>
+                    <mat-radio-button value="3">200.000đ - 300.000đ</mat-radio-button>
+                </mat-radio-group>
+              </div>
+              <div class="cartegory-left-bottom-author">
+                <p>Tác Giả</p>
+              <mat-radio-group ng-model="data.group2" [value]="OptionAuthor" (change)="filterProductsByAuthor($event.value)">
+                  <mat-radio-button value="">Tất cả</mat-radio-button>
+                  <mat-radio-button *ngFor="let entry of arrayAuthor | keyvalue" [value]="entry.key">
+                    {{ entry.value }}
+                  </mat-radio-button></mat-radio-group>
+              </div>
+
+            </div>
+
+        </div>
+        <div class="cartegory-right" >
+            <div class="cartegory-right-top" >
+                <p>SÁCH {{this.categoryname?.toLocaleUpperCase()}}</p>
+            </div>
+            <div class="cartegory-right-bottom select">
+                <mat-form-field>
+                    <mat-label>Sắp xếp theo giá</mat-label>
+                    <mat-select [(value)]="sortOptionprice" (selectionChange)="sortProducts($event.value)">
+                        <mat-option value="0">Chọn thứ tự của giá</mat-option>
+                        <mat-option value="1">Từ thấp đến cao</mat-option>
+                        <mat-option value="2">Từ cao đến thấp</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <!-- <div class="cartegory-right-bottom">
+                <div class="cartegory-right-bottom-item" *ngFor="let product of booksall"  (click)="navigateToProduct(product.bookId)">
+                  <div class="productIMG" >
+                    <img [src]="product.image0">
+                  </div>
+                    <h1 class=" btn-outline-secondary me-2" placement="top" ngbTooltip={{product.title}}>{{ product.title }}</h1>
+                    <p>{{product.unitPrice | number:'1.0-0'}}<sup>đ</sup></p>
+                    <p>{{percent1(product.unitPrice,product.pricePercent) | number:'1.0-0'}}<sup>đ</sup></p>
+                    <div class="product-rating">
+                       <app-rating-decimal [rating]="product.averageRating"></app-rating-decimal>
+                    </div>
+                </div>
+            </div> -->
+            <div class="cartegory-right-bottom">
+                <div class="cartegory-right-bottom-item" *ngFor="let product of booksPagination"  (click)="navigateToProduct(product.bookId)">
+                  <div class="productIMG" >
+                    <img [src]="product.image0">
+                  </div>
+                    <h1 class=" btn-outline-secondary me-2" placement="top" ngbTooltip={{product.title}}>{{ product.title }}</h1>
+                    <div class="product-right-price">
+                      <p>{{percent1(product.unitPrice,product.pricePercent) | number:'1.0-0'}}<sup>đ</sup></p>
+                    </div>
+                    <div class="gg">
+                      <p>{{product.unitPrice | number:'1.0-0'}}<sup>đ</sup></p>
+                      <p>{{percent2(product.pricePercent)}}</p>
+                    </div>
+                    <div class="product-rating">
+                       <app-rating-decimal [rating]="product.averageRating"></app-rating-decimal>
+                    </div>
+                </div>
+            </div>
+          <div class="page"> <ngb-pagination [collectionSize]="this.loadedBooksCount" (pageChange)="onPageChange($event)" [pageSize]="pageSize" [(page)]="page" aria-label="Default pagination" /></div>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>
+

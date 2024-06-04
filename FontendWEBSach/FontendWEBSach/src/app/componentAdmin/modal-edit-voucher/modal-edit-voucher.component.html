@@ -1,0 +1,29 @@
+<div class="modal-overlay" (click)="closeModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+        <div class="name-content">
+            Cập nhật voucher
+       </div>
+       <hr>
+       <div class="bookname-add">
+           <label>Mã voucher</label>
+           <input type="text">
+       </div>
+       <div class="bookname-add">
+           <label>Phần trăm giảm</label>
+           <input type="text">
+       </div>
+       <div class="bookname-add">
+           <label>Số tiền tối đa</label>
+           <input type="text">
+       </div>
+       <div class="bookname-add">
+           <label>Số lượng</label>
+           <input type="text">
+       </div>
+       <div class="btn-cancel-apply">
+           <button mat-raised-button (click)="closeModal()">HUỶ</button>
+           <button mat-raised-button>CẬP NHẬT VOUCHER</button>
+       </div>
+    </div>
+  </div>
+  

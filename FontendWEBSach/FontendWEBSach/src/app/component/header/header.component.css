@@ -1,0 +1,232 @@
+body {
+  font-family: Arial, sans-serif;
+}
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+/* HEADER */
+
+.header {
+  display: flex;
+  position: sticky;
+  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: #fff;
+  z-index: 999;
+}
+.header-no-zindex {
+  z-index: 1;
+}
+.header-top {
+  display: flex;
+
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+  padding: 0px 25px;
+}
+
+.logo-container .logo {
+  height: 80px;
+}
+
+.logo-container .logo:hover {
+  transform: scale(1.1);
+}
+
+.search-container {
+  flex: 0.5;
+  display: flex;
+  position: relative;
+  margin: 0 20px;
+  height: 40px;
+}
+
+.search-input {
+  flex: 1;
+  padding: 5px 40px 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.search-btn {
+  background: transparent;
+  border: none;
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+
+.search-icon {
+  height: 20px;
+  padding-right: 8px;
+}
+.search-icon:hover{
+  transform: scale(1.2);
+}
+.actions-container {
+  display: flex;
+}
+
+.action-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 10px;
+  border-radius: 8px;
+  padding: 0 5px;
+}
+
+
+.action-item img {
+  height: 20px;
+  margin-bottom: 5px;
+  transition: all 0.5s ease-in-out;
+}
+
+.action-item:hover {
+  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;  */
+  transform: scale(1.2);
+}
+
+.actions-container button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.nav-bar {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 10% 5px 10%;
+
+}
+
+.nav-item {
+  background: transparent;
+  border: none;
+  padding: 5px 3%;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+  font-size: 90%;
+  padding: 5px 2%;
+  white-space: nowrap;
+  box-sizing: border-box;
+
+}
+
+.nav-item:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Đổ bóng mờ dưới và phía bên phải */
+  background-color: #f0f0f0; /* Thay đổi màu nền khi lướt chuột vào nút */
+  color: #000; /* Thay đổi màu chữ khi lướt chuột vào nút */
+  transform: scale(1.1) translateZ(0);
+}
+
+.nav-item.active {
+  font-weight: bold; /* Làm đậm chữ */
+}
+
+
+/*content*/
+
+
+body {
+  position: relative;
+  height: 100%;
+  background: #fff;
+  font-size: 14px;
+  color: #000;
+}
+
+
+/*  */
+.dropdown{
+padding: 5px;
+position: absolute;
+display: none;
+flex-wrap: wrap;
+width: 100%;
+background-color: #fffd;
+top: 100%;
+border-radius: 5px;
+box-shadow: 1px 1px 1px 1px #ccc;
+z-index: 10;
+}
+.cartegory-right-bottom-item{
+display: flex;
+position: relative;
+width: calc(25% - 20px);
+height: 100%;
+text-align: center;
+padding: 5px 5px;
+margin: 10px;
+background-color: #fff;
+border-radius: 5px;
+flex-wrap: wrap;
+}
+.cartegory-right-bottom-item:hover{
+transform: scale(1.03);
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+transition: box-shadow 0.3s ease;
+}
+
+.cartegory-right-bottom-item p{
+font-size: 15px;
+padding: 5px 12px 0px;
+font-weight: 500;
+text-align: left;
+}
+.cartegory-right-bottom-item span{
+font-size: 15px;
+color: #777;
+margin-top: 10px;
+padding: 5px 12px;
+text-align: left;
+word-wrap: break-word;
+display: flex;
+display: -webkit-box;
+line-height: 1.4;
+-webkit-line-clamp: 2;
+-webkit-box-orient: vertical;
+overflow: hidden;
+text-overflow: ellipsis;
+}
+
+.cartegory-right-bottom-item img {
+position: relative;
+width: 50%;
+object-fit: contain;
+transition: all 0.5s ease-in-out;
+}
+
+.productIMG{
+  height: 60%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.productIMG img {
+  position: relative;
+  max-width: 60%;
+  max-height: 100%;
+  object-fit: contain;
+  transition: all 0.5s ease-in-out;
+}

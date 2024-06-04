@@ -1,0 +1,91 @@
+<div class="sach">
+  <div class="form-left">
+     <app-menu></app-menu>
+  </div>
+
+  <div class="form-right">
+      <div class="title">
+        QUẢN LÝ CỬA HÀNG
+      </div>
+      <div class="content">
+          <div class="name-content">
+              Danh sách
+          </div>
+          <hr>
+          <div class="search-add">
+              <div class="search-container">
+                  <input type="text" [(ngModel)]="book.title" name="name" placeholder="Tìm kiếm..." (input)="loadpro(book.title)" class="search-input" >
+                  <button class="search-btn">
+                      <mat-icon class="search-icon" >search</mat-icon>
+                  </button>
+              </div>
+          <div class="add-container">
+              <button mat-raised-button class="add-btn" routerLink="/them-sach">+ Thêm</button>
+          </div>
+          </div>
+          <div id="begin">
+          <table class="info-table">
+              <thead>
+                  <tr>
+                      <th><input type="checkbox" [checked]="selectAllChecked"></th>
+                      <th></th>
+                      <th>Tên sách</th>
+                      <th>Số lượng</th>
+                      <th>Tác giả</th>
+                      <th>Thao tác</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let book of productful">
+                      <td><input type="checkbox" ></td>
+                      <td><img class="bookimage" [src]="book.image0" alt="Hình ảnh sách"></td>
+                      <td>{{book.title}}</td>
+                      <td>{{book.quantity}}</td>
+                      <td>{{book.authorName}}</td>
+                      <!-- Trong template của SachComponent -->
+                      <td>
+                          <button mat-icon-button routerLink="/sua-sach"><mat-icon>edit</mat-icon></button>
+                          <button mat-icon-button (click)="openDeleteModal(book.bookId)"><mat-icon>delete</mat-icon></button>
+                      </td>
+
+                  </tr>
+              </tbody>
+          </table>
+          <div class="see-more-container">
+          <ngb-pagination [collectionSize]="this.loadedBooksCount" (pageChange)="onPageChange($event)" [pageSize]="sizepage" [(page)]="page" aria-label="Default pagination" />
+          </div>
+          </div>
+          <div id="search" style="display:none">
+          <table class="info-table">
+          <thead>
+              <tr>
+                  <th><input type="checkbox" [checked]="selectAllChecked"></th>
+                  <th></th>
+                  <th>Tên sách</th>
+                  <th>Số lượng</th>
+                  <th>Tác giả</th>
+                  <th>Thao tác</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr  *ngFor="let book of searchResults">
+                  <td><input type="checkbox" ></td>
+                  <td><img class="bookimage" [src]="book.image0" alt="Hình ảnh sách"></td>
+                  <td>{{book.title}}</td>
+                  <td>{{book.quantity}}</td>
+                  <td>{{book.authorName}}</td>
+                  <!-- Trong template của SachComponent -->
+                  <td>
+                      <button mat-icon-button routerLink="/sua-sach"><mat-icon>edit</mat-icon></button>
+                      <button mat-icon-button (click)="openDeleteModal(book.bookId)"><mat-icon>delete</mat-icon></button>
+                  </td>
+
+              </tr>
+              </tbody>
+      </table>
+      </div>
+      <app-modal-xoa [idbookDelete]="this.idbookdelete" *ngIf="isDeleteModalVisible" (closeModalEvent)="isDeleteModalVisible = false"></app-modal-xoa>
+      </div>
+  </div>
+</div>
+

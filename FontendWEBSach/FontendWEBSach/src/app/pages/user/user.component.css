@@ -1,0 +1,328 @@
+.main.user {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 0;
+    margin-left: 8%;
+    margin-right: 8%;
+}
+
+
+.left-user {
+    width: 25%;
+    padding-right: 20px;
+    border: 0px;
+    box-shadow: none;
+}
+
+.info-user {
+    display: flex;
+    align-items: flex-start;
+    height: auto; /* Tự động điều chỉnh chiều cao dựa trên nội dung */
+    /* padding: 10px; Giảm padding để thu nhỏ khối */
+    margin-bottom: 20px; /* Giảm khoảng cách với phần dưới */
+    /* border-radius: 12px; */
+    background-color: #E9EAEE;
+}
+
+.menu-user {
+    background-color: #E9EAEE;
+    /* margin-top: 20px; */
+}
+
+mat-list{
+
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+.img-user {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 20px;
+    margin-top: 8px;
+    width: 90px;
+    height: 90px;
+}
+
+.img-user img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.name-edit-container {
+
+    padding: 10px;
+    padding-bottom: 0px;
+    padding-left: -10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.edit-button-1 {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.edit-button-1 p {
+    font-size: 12px;
+    margin: 0; /* Xóa margin để tránh khoảng cách thừa */
+}
+
+.user-name {
+    margin-top: 10px;
+    font-size: 18px;
+    justify-content: center;
+}
+
+.edit-button {
+    display: flex;
+    align-items: center; /* căn chỉnh icon và chữ ở giữa theo chiều dọc */
+}
+
+.edit-button mat-icon {
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.mat-card-avatar img {
+    width: 56px;
+    height: auto;
+}
+
+.right-user {
+    width: 75%;
+    /* padding-right: 20px; */
+    border: 0px;
+
+}
+
+.edit-button-1 {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.edit-button-1 mat-icon{
+  margin-left: 5px;
+  margin-bottom: -5px;
+  font-size: 17px;
+}
+
+.edit-button-1 p {
+  font-size: 12px;
+  margin: 0;
+}
+
+.right-user-1 {
+    width: 100%;
+    border-radius: 5px;
+    background-color:#E9EAEE;
+    margin: 0 40px 0 10px;
+    padding-bottom: 30px;
+    margin-bottom: 40px;
+    box-shadow:0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.menu-icon{
+    margin-right: 15px;
+}
+
+.menu-list{
+    transition: background-color 0.3s;
+    /* margin-left: 10px; */
+    cursor: pointer;
+}
+
+.menu-list.selected {
+    transform: scale(1.1);
+    background-color: #97978D;
+    border-radius: 12px;
+  }
+
+
+.menu-list:hover{
+    transform: scale(1.1);
+    cursor: pointer;
+    border-radius: 12px;
+    /* background-color: #97978D; */
+}
+
+/* .menu-list:active{
+
+    background-color: #97978D;
+    border-radius: 12px;
+} */
+
+.highlighted-title-card {
+    margin-bottom: 10px;
+    background-color: #97978D;
+    border-radius: 5px;
+}
+
+.full-width-input {
+    width: 90%;  /* Chiều rộng tối đa */
+    margin-bottom: 5px;  /* Khoảng cách giữa các thẻ */
+    border-radius: 5px;  /* Bổ sung để làm tròn góc của khung */
+    margin-left: 40px;
+    margin-right: 20px;
+    flex: 1;
+}
+
+.input-container {
+    background-color: white;  /* Màu nền của container chứa các trường nhập liệu */
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.style-text-dn{
+    margin-top: 25px;
+    margin-left: 40px;
+}
+
+.style-text{
+    margin-left: 40px;
+}
+.style-text-nn{
+    margin-left: 40px;
+    margin-top: 16px;
+}
+
+.checkbox{
+    margin-left: 40px;
+    margin-bottom: 20px;
+}
+
+.cdk-overlay-connected-position-bounding-box {
+    top: 35px !important;
+}
+
+.cdk-overlay-pane {
+    top: 35px !important;
+}
+
+.mat-form-field {
+    margin-bottom: 20px;  /* Adjust this value as per your requirement */
+}
+
+.save-button {
+    float: right; /* Đặt nút bên phải */
+    /* margin-top: 20px;  */
+    margin-right: 50px;
+    width: 100px;
+    color: white;
+    /* font-weight: bold; */
+    background-color: #97978D;
+    z-index: 0;
+}
+
+.info-user, .menu-user{
+    border-radius: 8px;  /* Bạn có thể thay đổi giá trị này để điều chỉnh độ cong của góc */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  /* Bạn cũng có thể thay đổi các giá trị này để điều chỉnh hiệu ứng bóng */
+}
+
+.content-profile {
+    overflow: hidden;
+}
+
+.content-address{
+    overflow: hidden;
+}
+
+.content-ChangePassword {
+    overflow: hidden;
+}
+
+.content-order{
+    overflow: hidden;
+}
+
+.content-order {
+    margin: auto;
+    width: 90%;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    background-color: white;
+
+
+}
+
+.content-order-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.content-order-top-left {
+    flex-basis: 30%; /* Chỉ định chiều rộng tương đối cho khối ảnh */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.content-order-top-left img {
+    width: 30%;
+    height: auto;
+    object-fit: cover;
+}
+
+.content-order-top-right {
+    margin-left: 20px;
+    flex-basis: 70%; /* Chỉ định chiều rộng tương đối cho khối chi tiết sản phẩm */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.product-name {
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.product-details {
+    display: flex;
+    justify-content: space-between;
+}
+
+hr {
+    border: 0;
+    border-top: 2px solid black;
+    margin: 20px 0;
+}
+
+.content-order-bottom {
+    display: flex;
+    justify-content: space-around;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.total-price {
+    margin-left: 10px;
+}
+
+.content-order:not(:last-child) {
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}

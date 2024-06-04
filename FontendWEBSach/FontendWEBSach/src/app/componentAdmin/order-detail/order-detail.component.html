@@ -1,0 +1,74 @@
+<div class="order-detail">
+    <div class="form-left">
+       <app-menu></app-menu>
+    </div>
+    <div class="form-right">
+        <div class="title">
+          QUẢN LÝ CỬA HÀNG
+        </div>
+        <div class="content">
+            <div class="name-content">
+                Chi tiết đơn hàng
+            </div>
+            <hr>
+            <div class="form-MaDon">
+                <div class="order-info">
+                  <span class="label">Mã đơn hàng: {{ this.idOrderCustomer}}</span>
+                </div>
+                <div class="order-from-to">
+                  <div class="from">
+                    <span class="label">Từ:</span> <span class="value">KANN bookstore</span>
+                    <span class="label">Địa chỉ:</span> <span class="value">578 Nguyễn Duy</span>
+                    <span class="label">SĐT:</span> <span class="value">0384753419</span>
+                  </div>
+
+                  <div class="to">
+                    <span class="label">Đến:</span> <span class="value">{{ this.namecustomer}}</span>
+                    <span class="label">Địa chỉ:</span> <span class="value">{{ this.address }}</span>
+                    <span class="label">SĐT:</span> <span class="value">{{ this.phone }}</span>
+                  </div>
+                </div>
+              </div>
+            <hr>
+            <div class="form-NoiDung">
+              <div class="order-info">
+                <span class="label">Nội dung đơn hàng</span>
+              </div>
+              <table class="info-table">
+                <colgroup>
+                  <col style="width: 70%;">
+                  <col style="width: 30%;">
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th>Tên sách</th>
+                        <th>Số lượng</th>
+                    </tr>
+                </thead>
+                <tbody *ngFor="let b of orderData">
+                    <tr >
+                        <td class="left-align">{{b.bookName }}</td>
+                        <td>{{ b.quantity }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            </div>
+            <hr>
+            <div class="from-Gia">
+              <div class="total-price">
+                <span class="label">Tổng tiền đặt hàng:</span>
+                <span class="value-gia">{{(this.total)|number: '1.0-0'}}<sup>đ</sup></span>
+              </div>
+              <div class="order-date">
+                <span class="label">Ngày đặt hàng:</span>
+                <span class="value-gia">{{this.time}}</span>
+              </div>
+            </div>
+        </div>
+        <div class="see-more-container">
+          <button mat-button class="btn-xt" (click)="exportToWord()">In đơn hàng</button>
+      </div>
+      </div>
+</div>
+
+

@@ -1,0 +1,86 @@
+<div class="bookfix">
+    <div class="form-left">
+       <app-menu></app-menu>
+    </div>
+
+    <div class="form-right">
+        <div class="title">
+          QUẢN LÝ CỬA HÀNG
+        </div>
+        <div class="content">
+            <div class="name-content">
+                Sửa thông tin sách
+            </div>
+            <hr>
+
+            <!-- Thêm ảnh -->
+            <div class="img-add">
+                <label>Chọn ảnh sách</label>
+
+            </div>
+
+
+            <!-- Tên sách -->
+            <div class="bookname-add">
+                <label>Tên sách</label>
+                <input type="text" id="bookNameInput" >
+            </div>
+
+            <!-- Tác giả và Thể loại -->
+            <div class="aut-cate-add">
+                <div class="author-add">
+                    <label>Tác giả</label>
+                    <input type="text">
+                </div>
+                <div class="category-add">
+                    <label>Thể loại</label>
+                    <input type="text">
+                </div>
+            </div>
+
+            <!-- Năm xuất bản, Số lượng sách -->
+            <div class="publish-compant-year">
+                <div class="publish-company">
+                    <label>Năm xuất bản</label>
+                    <input type="text">
+                </div>
+                <div class="publish-year">
+                    <label>Số lượng sách</label>
+                    <input type="text">
+                </div>
+            </div>
+
+            <!-- Giá và Số lượng -->
+            <div class="price-quantity-add">
+                <div class="price-add">
+                    <label>Giá</label>
+                    <input type="text">
+                </div>
+                <div class="quantity-add">
+                    <label>Số lượng</label>
+                    <input type="text">
+                </div>
+            </div>
+
+            <!-- Trạng thái -->
+            <div class="status">
+                <label>Trạng thái</label>
+                <input type="text">
+            </div>
+
+            <!-- Mô tả -->
+            <div class="description">
+                <label for="descriptionInput">Mô tả</label>
+                <textarea id="descriptionInput"></textarea>
+            </div>
+
+            <!-- Nút Hủy và Áp dụng -->
+            <div class="btn-cancel-apply">
+                <button mat-raised-button routerLink="/admin">Hủy</button>
+                <button mat-raised-button>Xác nhận</button>
+            </div>
+        </div>
+      </div>
+</div>
+
+

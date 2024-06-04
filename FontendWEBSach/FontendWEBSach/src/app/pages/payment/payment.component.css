@@ -1,0 +1,99 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+.container{
+    max-width: 1300px;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+}
+
+
+.highlighted-products-section {
+    width: 100%;
+    border: 1px solid #E9EAEE;
+    border-radius: 5px;
+    background-color:#E9EAEE;
+    margin: 0 40px 0 0px;
+    padding-bottom: 30px;
+    margin-bottom: 40px;
+    /* background-color: #97978D; */
+}
+
+.highlighted-title-card {
+    margin-bottom: 10px;
+    background-color: #97978D;
+    border-radius: 5px;
+}
+
+.address-options {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.address-option {
+    padding: 10px;
+    margin-bottom: 10px;
+    position: relative;
+    flex-direction: column;
+    display: flex;
+}
+
+.address-option:last-child {
+    margin-bottom: 0;
+}
+
+.address-option mat-radio-button {
+    margin-left: auto;
+}
+
+.payment-img {
+    margin-left: 20%;
+    width: 80px;
+    height: auto;
+}
+
+.credit-card-logos {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.check-order tbody, th, td, tr{
+    width: 20%;
+    text-align: center;
+    padding: 10px 0;
+}
+
+.check-order td img{
+    width: 40%;
+}
+.main-payment{
+  display: flex;
+  justify-content: right;
+  flex-direction: column;
+}
+
+.btn-order{
+  /* width: 200px; */
+  margin-left: auto;
+}
+
+.btn-order button{
+  width: 200px;
+  font-size: 27px;
+  margin-bottom: 20px;
+}
+
+.check-order tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.check-order tbody tr:nth-child(odd) {
+  background-color: #ffffff;
+}
+
+

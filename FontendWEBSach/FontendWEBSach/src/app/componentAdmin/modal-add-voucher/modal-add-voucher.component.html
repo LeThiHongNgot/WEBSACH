@@ -1,0 +1,36 @@
+<div class="modal-overlay" (click)="closeModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+        <div class="name-content">
+             Thêm voucher
+        </div>
+        <hr>
+        <div class="bookname-add">
+            <label>Mã voucher</label>
+            <input type="text" [(ngModel)]="DataVoucher.Id" (ngModelChange)="DataVoucher.Id = convertToUppercase($event)">
+        </div>
+        <div class="bookname-add">
+            <label>Phần trăm giảm</label>
+            <input type="number" [(ngModel)]="DataVoucher.PercentDiscount">
+        </div>
+        <div class="bookname-add">
+            <label>Số tiền tối đa</label>
+            <input type="number" [(ngModel)]="DataVoucher.MaxDiscount">
+        </div>
+        <div class="bookname-add">
+            <label>Số lượng</label>
+            <input type="number" [(ngModel)]="DataVoucher.Quantity">
+        </div>
+        <div class="bookname-add">
+          <label>Ngày Bắt đầu</label>
+          <input type="date" [(ngModel)]="this.DataVoucher.dateBegin">
+      </div>
+      <div class="bookname-add">
+        <label>Ngày kết thúc</label>
+        <input type="date" [(ngModel)]="this.DataVoucher.dateEnd">
+    </div>
+        <div class="btn-cancel-apply">
+            <button mat-raised-button (click)="closeModal()">HUỶ</button>
+            <button mat-raised-button (click)="addVoucher()">TẠO VOUCHER</button>
+        </div>
+    </div>
+  </div>

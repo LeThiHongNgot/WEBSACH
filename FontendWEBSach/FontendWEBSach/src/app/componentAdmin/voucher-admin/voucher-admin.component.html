@@ -1,0 +1,63 @@
+<div class="voucher">
+    <div class="form-left">
+       <app-menu></app-menu>
+    </div>
+
+    <div class="form-right">
+        <div class="title">
+          QUẢN LÝ CỬA HÀNG
+        </div>
+        <div class="content">
+            <div class="name-content">
+                Danh sách
+            </div>
+            <hr>
+            <div class="search-add">
+                <div class="search-container">
+                    <input type="text" [(ngModel)]="voucher.Id" placeholder="Tìm kiếm..." class="search-input" (input)="loadpro(voucher.Id !== '' ? voucher.Id : null)"  placeholder="Tìm kiếm..." class="search-input">
+                    <button class="search-btn">
+                        <mat-icon class="search-icon" >search</mat-icon>
+                    </button>
+                </div>
+            <div class="add-container">
+                <button mat-raised-button class="add-btn" (click)="openAddVoucherModal()">+ Thêm voucher</button>
+            </div>
+            <app-modal-add-voucher *ngIf="isAddVoucherModalVisible" (closeModalEvent)="isAddVoucherModalVisible = false"></app-modal-add-voucher>
+            </div>
+            <table class="info-table">
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Mã voucher</th>
+                        <th>Ngày bắt đầu</th>
+                        <th>Ngày kết thúc</th>
+                        <th>Phần trăm giảm</th>
+                        <th>Số tiền tối đa</th>
+                        <th>Số lượng</th>
+                        <th>Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let one of filteredVouchers.slice(0, 25); let i=index">
+                        <td>{{ i+1 }}</td>
+                        <td>{{ one.id }}</td>
+                        <td>{{one.dateBegin}}</td>
+                        <td>{{one.dateEnd}}</td>
+                        <td>{{ one.percentDiscount }}</td>
+                        <td>{{ one.maxDiscount }}</td>
+                        <td>{{ one.quantity }}</td>
+                        <td>
+                            <button mat-icon-button (click)="openEditVoucherModal()"><mat-icon>edit</mat-icon></button>
+                            <button mat-icon-button (click)="openDeleteModal(one.id)"><mat-icon>delete</mat-icon></button>
+                        </td>
+                        <app-modal-edit-voucher  *ngIf="isEditVoucherModalVisible" (closeModalEvent)="isEditVoucherModalVisible = false"></app-modal-edit-voucher>
+                        <app-modal-xoa [idVoucherDelete]="this.idVoucherDelete" *ngIf="isDeleteModalVisible"  (closeModalEvent)="isDeleteModalVisible = false"></app-modal-xoa>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+      </div>
+
+
+
+</div>

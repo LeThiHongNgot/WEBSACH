@@ -1,0 +1,7 @@
+<div class="container-start">
+  <div *ngFor="let i of itemsToRepeat; let index = index">
+      <mat-icon *ngIf="index + 1 <= rating" class="star-icon filled-star" (click)="handleUpdateRating(index )">star</mat-icon>
+      <mat-icon *ngIf="index + 0.5 >= rating && index < rating" class="star-icon filled-star" (click)="handleUpdateRating(index + 1)">star_half</mat-icon>
+      <mat-icon *ngIf="index - 1 >= rating || index >= rating" class="star-icon" (click)="handleUpdateRating(index + 1)">star_border</mat-icon>
+  </div>
+</div>

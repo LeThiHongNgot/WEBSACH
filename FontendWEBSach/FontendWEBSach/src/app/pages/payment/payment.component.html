@@ -1,0 +1,67 @@
+<div id="ment" >
+<app-header></app-header>
+  <div class="container">
+
+    <div  class="main-payment">
+      <!-- chọn phương thức giao -->
+      <div class="highlighted-products-section">
+          <mat-card class="highlighted-title-card">
+              <mat-card-content style="font-size: 18px; color: #FFF;font-weight: bold;">ĐỊA CHỈ GIAO HÀNG</mat-card-content>
+          </mat-card>
+          <mat-radio-group class="address-options">
+            <mat-radio-button [value]="address" [checked]="true">{{ address }}</mat-radio-button>
+            <mat-radio-button (click)="stranUser()">Cập nhật lại địa chỉ</mat-radio-button>
+          </mat-radio-group>
+
+      </div>
+      <!-- Chọn phương thức thanh toán -->
+      <div class="highlighted-products-section">
+          <mat-card class="highlighted-title-card">
+              <mat-card-content style="font-size: 18px; color: #FFF;font-weight: bold;">PHƯƠNG THỨC THANH TOÁN</mat-card-content>
+          </mat-card>
+          <mat-radio-group class="address-options">
+              <div class="address-option">
+                  <mat-radio-button>Thanh toán khi nhận hàng</mat-radio-button>
+              </div>
+          </mat-radio-group>
+      </div>
+      <!-- Kiểm tra đơn hàng -->
+      <div class="highlighted-products-section">
+          <mat-card class="highlighted-title-card">
+              <mat-card-content style="font-size: 18px; color: #FFF;font-weight: bold;">ĐƠN HÀNG</mat-card-content>
+          </mat-card>
+        <div class="check-order" >
+          <table>
+                <tr>
+                    <th></th>
+                    <th>Tên sản phẩm</th>
+                    <th>Đơn giá</th>
+                    <th>Số lượng</th>
+                    <th>Thành tiền</th>
+                </tr>
+                <tbody>
+                <tr *ngFor="let i of books">
+                  <td><img src="{{i.image0}}" alt=""></td>
+                  <td>{{i.title}}</td>
+                  <td>{{(percent1(i.unitPrice, i.pricePercent)) | number:'1.0-0'}}<sup>đ</sup></td>
+                  <td>{{quantity[i.bookId]}}</td>
+                  <td>{{((quantity[i.bookId] != null ? quantity[i.bookId] : 1) * percent1(i.unitPrice, i.pricePercent)) | number:'1.0-0' }}<sup>đ</sup></td>
+                </tr>
+              </tbody>
+                <tr>
+                  <th></th>
+                  <th>Phí ship</th>
+                  <th>20.000đ</th>
+                  <th>Tổng tiền</th>
+                  <th>{{(this.totalmoney+20000)  | number:'1.0-0'}}<sup>đ</sup></th>
+                </tr>
+          </table>
+        </div>
+      </div>
+      <div class="btn-order">
+        <button mat-raised-button (click)="Order()">ĐẶT HÀNG</button>
+      </div>
+</div>
+</div>
+<app-footer></app-footer>
+</div>

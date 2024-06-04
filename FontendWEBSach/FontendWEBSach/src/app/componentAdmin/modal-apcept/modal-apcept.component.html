@@ -1,0 +1,9 @@
+<div class="modal-overlay" (click)="closeModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+      <p><mat-icon color="warn">warning</mat-icon>  Bạn có chắc chắn xác nhận?</p>
+      <div class="btn-acp">
+          <button mat-raised-button (click)="closeModal()">Hủy</button>
+          <button mat-raised-button color="warn" (click)="closeModal()">Xác nhận</button>
+      </div>
+  </div>
+</div>
