@@ -2,6 +2,6 @@
 export interface Author {
   id: string;
   name: string;
-  image: string;
+  image: File;
   description: string;
 }

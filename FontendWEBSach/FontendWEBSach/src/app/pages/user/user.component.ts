@@ -8,15 +8,16 @@ import {ShoppingCartItem} from 'src/interfaces/Orders';
 import { CloudConfig, Cloudinary, CloudinaryImage, URLConfig } from '@cloudinary/url-gen';
 import { fill } from '@cloudinary/url-gen/actions/resize';
 import { UploadService } from 'src/services/Users/upload.service';
+import { BillsService } from 'src/services/Bills/bills.service';
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
-  styleUrls: ['./user.component.css']
+  styleUrls: ['./user.component.css'],
 })
 export class UserComponent {
   Dataupdatepassword: any = {};
   currentPage: string = 'hoSo';
-  getCustomer:Customer| null = null;;
+  getCustomer:Customer| null = null;
   idcustomer:string='';
   gender: string = '';
   phone:string='';
@@ -26,14 +27,23 @@ export class UserComponent {
   selectedDate: Date = new Date();
   shopingCart:ShoppingCartItem[]=[]
   totalcart:number=0;
+
+  active = 1;
   showPage(pageName: string) {
+    if(pageName==='donHang')
+    {
+      this.StatusBill('Chờ Xác Nhận')
+    }
     this.currentPage = pageName;
   }
   selectedMenuItem: string = 'hoSo';
   selectMenuItem(itemName: string) {
     this.selectedMenuItem = itemName;
   }
-  constructor(private customer: CustomerService, private customerMain:CustomermainService,private router: Router, private ordersservice: OrdersService, private upload: UploadService) {
+  constructor(private customer: CustomerService, private customerMain:CustomermainService,
+    private router: Router,
+    private ordersservice: OrdersService,
+     private upload: UploadService,private billService:BillsService) {
     const savedImageSrc = localStorage.getItem('userImageSrc');
     if (savedImageSrc) {
       this.userImageSrc = savedImageSrc;
@@ -83,13 +93,17 @@ export class UserComponent {
 }
 ngOnInit()
 {
+
+}
+getOrdersByStatus(status: number): ShoppingCartItem[] {
+  return this.shopingCart.filter(item => item.status === status);
 }
 Updatepass()
 {
  const dataupdate={
     id: this.getCustomer?.id,
     fullName: this.getCustomer?.fullName,
-    photo:'',
+    photo:this.getCustomer?.photo,
     activated: true,
     password: this.Dataupdatepassword.password,
     email: this.getCustomer?.email,
@@ -98,7 +112,7 @@ Updatepass()
     birthday: this.getCustomer?.birthday,
  }
   const password = this.Dataupdatepassword.passwordODL;
- if(this.Dataupdatepassword.password==this.Dataupdatepassword.passwordconfirm)
+if(this.Dataupdatepassword.password==this.Dataupdatepassword.passwordconfirm)
 {
   this.customer.updatepass(this.phone, password).subscribe
   ({
@@ -126,11 +140,11 @@ else
 Address()
 {
   this.idcustomer=this.customer.getClaimValue();
- this.updateAddress()
+  this.updateAddress()
   const dataupdate={
     id: this.idcustomer,
     fullName: this.getCustomer?.fullName,
-    photo:'',
+    photo:this.getCustomer?.photo,
     activated: true,
     password: this.getCustomer?.password,
     email: this.getCustomer?.email,
@@ -146,7 +160,7 @@ Address()
       alert("Lưu địa chỉ thành công")
     },
     error: (err) => {
-      alert('Lỗi thay lưu dữ liệu ');
+      alert('Lỗi thay đổi dữ liệu ');
     },
   }
  )
@@ -165,7 +179,7 @@ updateprofile()
   const dataupdate={
     id: this.idcustomer,
     fullName: this.getCustomer?.fullName,
-    photo:'',
+    photo:this.getCustomer?.photo,
     activated: true,
     password: this.getCustomer?.password,
     email: this.getCustomer?.email,
@@ -206,13 +220,10 @@ CartShoping() {
   );
   this.totalcart+=20000
 }
-
-
   onDateChange(event: any) {
     this.selectedDate = event.value;
     console.log('Selected Date:', this.selectedDate);
   }
-
 //----------------------------------------
 logout()
 {
@@ -230,13 +241,11 @@ logout()
     }
   }
 
-
   async onSelect(event: any): Promise<void> {
     const inputFile = event.target as HTMLInputElement;
     if (inputFile && inputFile.files && inputFile.files.length > 0) {
       this.file = inputFile.files[0];
       console.log('Tên của tệp đã chọn:', this.file);
-
       const data = new FormData();
       data.append('file', this.file);
       data.append('upload_preset', 'angular_app');
@@ -261,7 +270,6 @@ logout()
             };
 
             console.log(customerUpdateData);
-
             this.customerMain.updateCustomer(this.idUser, customerUpdateData).subscribe({
               next:() => {
                 window.location.reload();
@@ -295,9 +303,21 @@ logout()
     this.disableAddressFields = this.detailedAddress.trim() !== ''; // Kiểm tra xem có địa chỉ chi tiết không để vô hiệu hóa trường
     console.log(this.fulladdress)
  }
-
-
+ bills: any[] = [];
+ StatusBill(status:string)
+ {
+  this.bills=[]
+  this.billService.getBillStatus(this.idcustomer,status).subscribe({
+    next:(res:any[]) => {
+      this.bills = res;
+      console.log(this.bills)
+    },
+    error: (err: any) => {
+      console.error("Lỗi khi cập nhật dữ liệu:", err);
+    }
+  });
 }
+ }
 
 function extractAddressInfo(fullAddress:string) {
   const addressParts = fullAddress.split(',').map(part => part.trim());

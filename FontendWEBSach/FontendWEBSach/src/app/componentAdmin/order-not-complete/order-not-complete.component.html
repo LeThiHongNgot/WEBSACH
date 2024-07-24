@@ -38,19 +38,35 @@
                   </tr>
               </thead>
               <tbody>
-                  <tr *ngFor="let order of orderData">
-                      <td></td>
-                      <td>{{ order.id }}</td>
-                      <td>{{ order.customerName }}</td>
-                      <td>{{ order.customerName}}</td>
-                      <td>{{ order.orderDate }}</td>
-                      <td>{{ (order.unitPrice) |number:'1.0-0'}} <sup>đ</sup></td>
-                      <td>{{ order.status }}</td>
-                      <td>
-                          <button mat-icon-button (click)="sendIdTime(order.customerId,order.description)"><mat-icon>remove_red_eye</mat-icon></button>
-                      </td>
-                  </tr>
-              </tbody>
+                <tr *ngFor="let order of orderData let i = index">
+                    <td>{{i+1}}</td>
+                    <td>{{ order.id }}</td>
+                    <td>{{ order.customerName}}</td>
+                    <td>
+                     <select [(ngModel)]="order.paymentStatus"(change)="handlepaymentstatusChange(order.id,$event)" >
+                          <option value="Chưa Thanh Toán">Chưa Thanh Toán</option>
+                          <option value="Paypal">Paypal</option>
+                          <option value="Vnpay">Vnpay</option>
+                          <option value="Đã Thanh Toán">Đã Thanh Toán</option>
+                        </select>
+                    </td>
+                    <td>{{ order.orderDate | date: 'yyyy-MM-dd' }}</td>
+                    <td>{{ (order.totalAmount) |number:'1.0-0'}} <sup>đ</sup></td>
+                    <td>
+                      <select  [(ngModel)]="order.status" (change)="handlestatusChange($event,order.id)">
+                        <option value="Hủy Đơn">Hủy Đơn</option>
+                        <option value="Đang Giao">Đang giao</option>
+                        <option value="Đã Giao">Đã giao</option>
+                        <option value="Chờ Xác Nhận">Chờ Xác Nhận</option>
+                      </select>
+                      <app-modal-apcept [id]=" this.id" (updateSuccess)="onUpdateSuccess()" [status]="this.status" [statusPayment]="this.statusPayment" *ngIf="isModalApceptVisible" (closeModalEvent)="isModalApceptVisible = false"></app-modal-apcept>
+                    </td>
+                    <td>
+                      <!-- /OrderDetail-admin -->
+                        <button mat-icon-button (click)="sendId(order.id)"><mat-icon>remove_red_eye</mat-icon></button>
+                    </td>
+                </tr>
+            </tbody>
           </table>
         </div>
       </div>

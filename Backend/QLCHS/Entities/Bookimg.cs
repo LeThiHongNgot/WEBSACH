@@ -11,6 +11,6 @@ namespace QLCHS.Entities
         public string? Image2 { get; set; }
         public string? Image3 { get; set; }
 
-        public virtual Book? Book { get; set; } 
+        public virtual Book Book { get; set; } = null!;
     }
 }

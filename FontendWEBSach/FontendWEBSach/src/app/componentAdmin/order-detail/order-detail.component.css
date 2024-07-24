@@ -5,25 +5,21 @@
 }
 
 .form-left {
-    flex: 1;
-    flex-direction: column;
-    background-color: #e9eaee;
-    width: 25%;
-    min-height: 100vh;
-    margin-right: 2%;
-    padding: 20px;
-    position: sticky;
-    top: 0;
-    flex-shrink: 0;
-    overflow-y: auto;
+  width: 300px;
+  min-height: 100vh;
+  margin-right: 2%;
+  background-color: #e9eaee;
+  padding: 20px;
+  position: sticky;
+  top: 0;
+  flex-shrink: 0;
+  overflow-y: auto;
 }
 
 .form-right {
-    flex: 4;
-    width: 100%;
-    overflow-y: auto;
-    /* margin-right: 5%; */
-    padding-right: 2%;
+  flex-grow: 1;
+  overflow-y: auto;
+  padding-right: 2%;
 }
 
 .title {

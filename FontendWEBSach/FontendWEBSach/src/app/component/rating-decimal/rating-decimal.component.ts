@@ -1,6 +1,6 @@
-import { Component, Input,Output,EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
-import { NgbRatingConfig} from '@ng-bootstrap/ng-bootstrap';
+import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-rating-decimal',
@@ -16,8 +16,8 @@ export class RatingDecimalComponent {
   itemsToRepeat = new Array(5);
 
   handleUpdateRating(newRate: number) {
-      this.rating = newRate;
-      this.ratingChange.emit(this.rating);
+    this.rating = newRate;
+    this.ratingChange.emit(this.rating);
   }
 
 }

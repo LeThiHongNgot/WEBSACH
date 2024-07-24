@@ -1,10 +1,9 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
+import { Injectable, NgModule } from '@angular/core';
+import { HttpClient, HttpClientModule } from "@angular/common/http";
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
-
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +13,8 @@ export class CustomerService {
   userInfo = new BehaviorSubject(null);
   jwtHelper = new JwtHelperService();
   constructor(private http: HttpClient, private router: Router,) {
-   }
-   forgerPass(phone: number, pass: string) {
+  }
+  forgerPass(phone: number, pass: string) {
     return this.http.put(`${this.baseUrl}updatePassword/${phone}/${pass}`, {});
   }
 
@@ -47,7 +46,7 @@ export class CustomerService {
   }
   getClaimValue(): string | '' {
     const token = localStorage.getItem('access_token');
-   const claimName = 'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'
+    const claimName = 'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'
     if (token) {
       try {
         // Giải mã token
@@ -66,3 +65,4 @@ export class CustomerService {
     }
   }
 }
+

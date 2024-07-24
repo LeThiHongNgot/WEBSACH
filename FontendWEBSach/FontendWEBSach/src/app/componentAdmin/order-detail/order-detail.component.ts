@@ -1,59 +1,66 @@
-import { Component,Input } from '@angular/core';
-import { OrderWithDetails } from 'src/interfaces/Orders';
+import { Component,Input,OnInit  } from '@angular/core';
+import { BillWithCustomer } from 'src/interfaces/Orders';
 import { OrdersService } from 'src/services/Orders/orders.service';
 import { SharedataService } from 'src/services/sharedata/sharedata.service';
 import { WordService } from 'src/services/Word/word.service';
-
+import { BillsService } from 'src/services/Bills/bills.service';
+import { ActivatedRoute } from '@angular/router';
+import { DatePipe } from '@angular/common';
 @Component({
   selector: 'app-order-detail',
   templateUrl: './order-detail.component.html',
-  styleUrls: ['./order-detail.component.css']
+  styleUrls: ['./order-detail.component.css'],
+  providers: [DatePipe]
 })
 export class OrderDetailComponent {
-  @Input() idCustomer: any;
-  @Input() Time: any;
-  orderData:OrderWithDetails[]=[];
+  @Input() id: any;
+  orderData:any;
   address:string='';
   phone:string='';
-  idOrderCustomer:string='';
+  idbill:string='';
   namecustomer:string='';
-  time:string='';
+  adress:string='';
   total:number=0;
-  id:string='';
-  constructor(private Order:OrdersService,private sharedata:SharedataService,private wordService: WordService)
+  time?: Date;
+  constructor(private Order:OrdersService,
+    private wordService: WordService,
+    private billservice:BillsService,
+    private route:ActivatedRoute,
+    private datePipe: DatePipe)
   {
-      this.sharedata.idCustomer$.subscribe((value) => {
-        this.idOrderCustomer = value;
-      });
-      this.sharedata.time$.subscribe((value) => {
-        this.time= value;
-      });
-      if (this.idOrderCustomer !== null && this.time !== null) {
-        const encodedTimestamp = encodeURIComponent(this.time);
-        this.Order.getOrdersByCustomerIdAndTimestamp(this.idOrderCustomer, encodedTimestamp).subscribe({
-          next: res => {
-            this.orderData = res;
-            if (Array.isArray(this.orderData) && this.orderData.length > 0) {
-              this.address = this.orderData[0].address;
-              this.phone = this.orderData[0].phone;
-              this.id=this.orderData[0].id
-              this.namecustomer = this.orderData[0].customerName;
-            } else {
-              console.log('Invalid or empty response structure.');
-            }
-            this.ToTal()
-          },
-          error: err => {
-            console.log("Error fetching data: ", err);
-          }
-        });
-      }
+
+  }
+  ngOnInit(): void {
+    this.idbill = this.route.snapshot.paramMap.get('id') || '';
+    if (this.idbill) {
+      this.fetchBillDetails();
+    }
   }
 
+  fetchBillDetails(): void {
+    if (this.idbill) {
+      this.billservice.getdetailsbill(this.idbill).subscribe({
+        next: (res) => {
+          this.orderData = res;
+          if (this.orderData.length > 0) {
+            this.total = this.orderData[0].totalAmount;
+            this.namecustomer = this.orderData[0].nameCustomer;
+            this.time = this.orderData[0].orderDate;
+            this.address = this.orderData[0].address;
+            this.phone = this.orderData[0].phoneNumber;
+          }
+          console.log('get successful:', this.orderData);
+        },
+        error: err => {
+          console.error('get failed:', err);
+        }
+      });
+    }
+  }
   exportToWord(): void {
     const data = {
       phone:this.phone,
-     name: this.namecustomer,
+      name: this.namecustomer,
       address:this.address,
       id: this.id, // Sample order ID
       total: this.total, // Sample total price
@@ -62,13 +69,14 @@ export class OrderDetailComponent {
     };
     const fileName = 'InHoaDon.pdf';
 
-    this.wordService.exportToWord(data, fileName);
-  }
-  ToTal()
-  {
-    for(let i of this.orderData)
-    {
-      this.total+=i.unitPrice*i.quantity
-    }
+  //  this.wordService.exportToWord(data, fileName);
+  // }
+  // ToTal()
+  // {
+  //   for(let i of this.orderData)
+  //   {
+  //     this.total+=i.unitPrice*i.quantity
+  //   }
+  // }
   }
 }

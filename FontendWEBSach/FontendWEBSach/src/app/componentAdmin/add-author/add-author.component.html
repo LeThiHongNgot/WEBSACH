@@ -1,0 +1,23 @@
+<div class="modal-overlay" (click)="closeModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+      <div class="name-content">
+          Thêm Tác Giả
+      <hr>
+      <div class="bookname-add">
+          <label>Hình ảnh</label>
+          <input type="file"(change)="onFileSelected($event)">
+      </div>
+      <div class="bookname-add">
+          <label>Tên</label>
+          <input  type="text" [(ngModel)]="Data.name">
+      </div>
+      <div class="bookname-add">
+          <label>Mô tả</label>
+          <input type="text" [(ngModel)]="Data.description">
+      </div>
+      <div class="btn-cancel-apply">
+          <button mat-raised-button (click)="closeModal()">Hủy</button>
+          <button mat-raised-button (click)="addAuthor()">THÊM TÁC GIẢ</button>
+      </div>
+
+</div>

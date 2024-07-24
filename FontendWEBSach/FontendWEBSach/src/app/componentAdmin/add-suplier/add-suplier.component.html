@@ -1,0 +1,37 @@
+<div class="modal-overlay" (click)="closeModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+        <div class="name-content">
+            Thêm nhà cung cấp
+        </div>
+        <hr>
+        <div class="bookname-add">
+            <label>Mã nhà cung cấp</label>
+            <input type="text" [(ngModel)]="supplierData.id" disabled>
+        </div>
+        <div class="bookname-add">
+            <label>Tên nhà cung cấp</label>
+            <input type="text" [(ngModel)]="supplierData.name" required>
+        </div>
+        <div class="bookname-add">
+            <label>Số điện thoại</label>
+            <input type="text" maxlength="10" (input)="onPhoneInput($event)" [(ngModel)]="supplierData.phone">
+            <div *ngIf="phoneInputInvalid" class="error-message" >Số điện thoại phải có đúng 10 số</div>
+
+        </div>
+        <div class="bookname-add">
+            <label>Email</label>
+            <input type="text" [(ngModel)]="supplierData.email">
+        </div>
+        <div class="bookname-add">
+            <label>Mô tả</label>
+            <input type="text" [(ngModel)]="supplierData.description">
+        </div>
+      
+
+        <div class="btn-cancel-apply">
+            <button mat-raised-button (click)="closeModal()">HUỶ</button>
+            <button mat-raised-button (click)="addSuplier()" [disabled]="formInvalid">THÊM NHÀ CUNG CẤP</button>
+        </div>
+
+    </div>
+</div>

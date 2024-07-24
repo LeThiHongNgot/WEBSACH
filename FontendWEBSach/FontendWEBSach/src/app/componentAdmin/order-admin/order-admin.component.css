@@ -6,11 +6,10 @@
 }
 
 .form-left {
-  flex: 1;
-  flex-direction: column;
-  background-color: #e9eaee;
+  width: 300px;
   min-height: 100vh;
   margin-right: 2%;
+  background-color: #e9eaee;
   padding: 20px;
   position: sticky;
   top: 0;
@@ -19,11 +18,10 @@
 }
 
 .form-right {
-  flex: 5;
+  flex-grow: 1;
   overflow-y: auto;
   padding-right: 2%;
 }
-
 .title {
   font-size: 26px;
   font-weight: bold;

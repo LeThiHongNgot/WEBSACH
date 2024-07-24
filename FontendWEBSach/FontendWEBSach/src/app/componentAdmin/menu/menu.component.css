@@ -1,3 +1,8 @@
+.container
+{
+  position: relative;
+  width: 250px;
+}
 .logo img {
     width: 100%;
     margin-bottom: 20px;

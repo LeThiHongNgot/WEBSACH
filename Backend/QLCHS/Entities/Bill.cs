@@ -5,15 +5,21 @@ namespace QLCHS.Entities
 {
     public partial class Bill
     {
+        public Bill()
+        {
+            Orders = new HashSet<Order>();
+        }
+
         public string Id { get; set; } = null!;
-        public string OrderId { get; set; } = null!;
-        public string UserId { get; set; } = null!;
-        public string VoucherId { get; set; } = null!;
+        public string? UserId { get; set; }
+        public string? VoucherId { get; set; }
         public DateTime? BillDate { get; set; }
         public decimal? TotalAmount { get; set; }
+        public string? PaymentStatus { get; set; }
+        public string? Status { get; set; }
 
-        public virtual Order Order { get; set; } = null!;
-        public virtual User User { get; set; } = null!;
-        public virtual Voucher Voucher { get; set; } = null!;
+        public virtual User? User { get; set; }
+        public virtual Voucher? Voucher { get; set; }
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }

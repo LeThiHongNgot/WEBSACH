@@ -32,7 +32,7 @@ export class VoucherAdminComponent {
   isDeleteModalVisible = false;
   isEditVoucherModalVisible = false;
   isAddVoucherModalVisible = false;
-  idVoucherDelete: any;
+  idVoucher: any;
   loadpro(searchTerm: string | null) {
     if (searchTerm && searchTerm.trim() !== '') {
       // Filter the books based on the search term
@@ -42,7 +42,6 @@ export class VoucherAdminComponent {
     } else {
       // If no search term or an empty search term, show all books
       this.filteredVouchers = this.Vouchers.slice(0, 25); // Or simply assign this.filteredBooks = this.Books; for all books
-
     }
   }
 
@@ -57,7 +56,9 @@ export class VoucherAdminComponent {
   }
 
   // Hiển thị modal edit
-  openEditVoucherModal() {
+  openEditVoucherModal(idVoucher:string) {
+    this.idVoucher=idVoucher
+    console.log(this.idVoucher)
     this.isEditVoucherModalVisible = true;
   }
 
@@ -68,7 +69,7 @@ export class VoucherAdminComponent {
 
   // Hiển thị modal xác nhận xóa
   openDeleteModal(id: any) {
-    this.idVoucherDelete= id;
+    this.idVoucher= id;
     this.isDeleteModalVisible = true;
   }
 

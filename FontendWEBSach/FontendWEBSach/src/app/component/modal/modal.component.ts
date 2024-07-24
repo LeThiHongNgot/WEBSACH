@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter, Renderer2, ElementRef, HostListener,NgZone } from '@angular/core';
+import { Component, Output, EventEmitter, Renderer2, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import {Customer} from '../../../interfaces/Customer';
 import { CustomerService } from 'src/services/customer/customer.service';

@@ -2,7 +2,6 @@
     <div class="form-left">
        <app-menu></app-menu>
     </div>
-
     <div class="form-right">
         <div class="title">
           QUẢN LÝ CỬA HÀNG
@@ -47,17 +46,14 @@
                         <td>{{ one.maxDiscount }}</td>
                         <td>{{ one.quantity }}</td>
                         <td>
-                            <button mat-icon-button (click)="openEditVoucherModal()"><mat-icon>edit</mat-icon></button>
+                            <button mat-icon-button (click)="openEditVoucherModal(one.id)"><mat-icon>edit</mat-icon></button>
                             <button mat-icon-button (click)="openDeleteModal(one.id)"><mat-icon>delete</mat-icon></button>
                         </td>
-                        <app-modal-edit-voucher  *ngIf="isEditVoucherModalVisible" (closeModalEvent)="isEditVoucherModalVisible = false"></app-modal-edit-voucher>
-                        <app-modal-xoa [idVoucherDelete]="this.idVoucherDelete" *ngIf="isDeleteModalVisible"  (closeModalEvent)="isDeleteModalVisible = false"></app-modal-xoa>
+                        <app-modal-add-voucher [isEditMode]="this.idVoucher"*ngIf="isEditVoucherModalVisible" (closeModalEvent)="isEditVoucherModalVisible = false"></app-modal-add-voucher>
+                        <app-modal-xoa [idDeleteVoucher]="this.isDeleteModalVisible" *ngIf="isDeleteModalVisible"  (closeModalEvent)="isDeleteModalVisible = false"></app-modal-xoa>
                     </tr>
                 </tbody>
             </table>
         </div>
       </div>
-
-
-
 </div>

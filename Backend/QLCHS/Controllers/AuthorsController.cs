@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using QLCHS.DTO;
 using QLCHS.Entities;
 
 namespace QLCHS.Controllers
@@ -24,21 +25,34 @@ namespace QLCHS.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Author>>> GetAuthors()
         {
-          if (_context.Authors == null)
-          {
-              return NotFound();
-          }
-            return await _context.Authors.ToListAsync();
+            if (_context.Authors == null)
+            {
+                return NotFound();
+            }
+
+            var authors = await _context.Authors.ToListAsync();
+
+            // Cập nhật đường dẫn hình ảnh tuyệt đối
+            foreach (var author in authors)
+            {
+                if (!string.IsNullOrEmpty(author.Image))
+                {
+                    author.Image = $"{Request.Scheme}://{Request.Host}{author.Image}";
+                }
+            }
+
+            return authors;
         }
 
         // GET: api/Authors/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Author>> GetAuthor(string id)
         {
-          if (_context.Authors == null)
-          {
-              return NotFound();
-          }
+            if (_context.Authors == null)
+            {
+                return NotFound();
+            }
+
             var author = await _context.Authors.FindAsync(id);
 
             if (author == null)
@@ -46,11 +60,16 @@ namespace QLCHS.Controllers
                 return NotFound();
             }
 
+            // Cập nhật đường dẫn hình ảnh tuyệt đối
+            if (!string.IsNullOrEmpty(author.Image))
+            {
+                author.Image = $"{Request.Scheme}://{Request.Host}{author.Image}";
+            }
+
             return author;
         }
 
         // PUT: api/Authors/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutAuthor(string id, Author author)
         {
@@ -81,14 +100,43 @@ namespace QLCHS.Controllers
         }
 
         // POST: api/Authors
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Author>> PostAuthor(Author author)
+        public async Task<ActionResult<Author>> PostAuthor([FromForm] AuthorDTO authorDto)
         {
-          if (_context.Authors == null)
-          {
-              return Problem("Entity set 'QLBANSACHContext.Authors'  is null.");
-          }
+            if (_context.Authors == null)
+            {
+                return Problem("Entity set 'QLBANSACHContext.Authors' is null.");
+            }
+
+            // Generate new Id for Author
+            var lastAuthor = await _context.Authors
+                                           .OrderByDescending(a => a.Id)
+                                           .FirstOrDefaultAsync();
+
+            int newIdNumber = 1;
+            if (lastAuthor != null && int.TryParse(lastAuthor.Id.Substring(1), out int lastIdNumber))
+            {
+                newIdNumber = lastIdNumber + 1;
+            }
+
+            var author = new Author
+            {
+                Id = "A" + newIdNumber.ToString("D3"), // Assuming Id format like A001
+                Name = authorDto.name,
+                Description = authorDto.description
+            };
+
+            if (authorDto.image != null)
+            {
+                // Save file to wwwroot
+                var filePath = Path.Combine("wwwroot/authors", authorDto.image.FileName);
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await authorDto.image.CopyToAsync(stream);
+                }
+                author.Image = "/authors/" + authorDto.image.FileName;
+            }
+
             _context.Authors.Add(author);
             try
             {
@@ -108,6 +156,7 @@ namespace QLCHS.Controllers
 
             return CreatedAtAction("GetAuthor", new { id = author.Id }, author);
         }
+
 
         // DELETE: api/Authors/5
         [HttpDelete("{id}")]

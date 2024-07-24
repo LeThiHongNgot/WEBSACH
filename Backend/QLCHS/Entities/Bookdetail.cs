@@ -11,7 +11,7 @@ namespace QLCHS.Entities
         public int? Pages { get; set; }
         public string? Description { get; set; }
 
-        public virtual Book? Book { get; set; } 
-        public virtual Category? Category { get; set; } 
+        public virtual Book Book { get; set; } = null!;
+        public virtual Category Category { get; set; } = null!;
     }
 }

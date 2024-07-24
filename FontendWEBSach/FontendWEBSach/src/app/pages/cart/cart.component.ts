@@ -146,14 +146,21 @@ checkchooseproduct()
 
     BuyProduct() {
       if (this.checkedProductIds && this.checkedProductIds.length > 0) {
-        this.sharedata.setCheckedProductIds(this.checkedProductIds);
-        this.sharedata.setProductsPrice(this.productsPrice);
-        this.sharedata.setQuantity(this.quantity);
-        this.router.navigate(['payment']);
+        // Tạo một khóa duy nhất (ví dụ sử dụng thời gian hiện tại)
+    const uniqueKey = `payment_${new Date().getTime()}`;
+
+    // Lưu trữ dữ liệu vào sessionStorage
+    sessionStorage.setItem(`${uniqueKey}_checkedProductIds`, JSON.stringify(this.checkedProductIds));
+    sessionStorage.setItem(`${uniqueKey}_productsPrice`, JSON.stringify(this.productsPrice));
+    sessionStorage.setItem(`${uniqueKey}_quantity`, JSON.stringify(this.quantity));
+    this.router.navigate(['payment'], {
+      queryParams: { sessionKey: uniqueKey }
+    });
       } else {
        alert("Bạn chưa chọn giỏ hàng")
       }
     }
+    
 selectAll(event: any): void {
   const selectAllChecked = event.checked;
   this.totalProduct=0

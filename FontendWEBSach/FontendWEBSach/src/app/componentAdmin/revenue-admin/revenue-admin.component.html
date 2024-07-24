@@ -33,7 +33,7 @@
                 <div class="date-for-to-btn">
                     <input type="date" placeholder="Từ ngày">
                     <input type="date" placeholder="Đến ngày">
-                    <button (click)="exportToExcel()">Xuất Excel</button>
+                    <!-- <button (click)="exportToExcel()">Xuất Excel</button> -->
                 </div>
             </div>
 
@@ -48,13 +48,13 @@
                     </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let product of productDetails; let i = index">
+                  <!-- <tr *ngFor="let product of productDetails; let i = index">
                     <td>{{ i + 1 }}</td>
                     <td>{{ (product.name) }}</td>
                     <td>{{ product.unitPrice }}</td>
                     <td>{{ product.quantitySold|number:'1.0-0' }}</td>
                     <td>{{ product.totalRevenue |number:'1.0-0'}}</td>
-                  </tr>
+                  </tr> -->
                 </tbody>
                 <tfoot>
 

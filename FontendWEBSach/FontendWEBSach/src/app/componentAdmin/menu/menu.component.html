@@ -1,10 +1,11 @@
+<div class="container">
 <div class="logo">
     <img src="assets/logo.png" alt="logo">
 </div>
 <hr>
 <div class="menu-list">
     <mat-nav-list>
-        <mat-list-item routerLink="/admin" >
+        <mat-list-item routerLink="/books" >
             <mat-icon>book</mat-icon> Sách
         </mat-list-item>
         <mat-list-item routerLink="/user-admin">
@@ -25,5 +26,9 @@
         <mat-list-item routerLink="/revenue-admin">
             <mat-icon>bar_chart</mat-icon> Thống kê doanh thu
         </mat-list-item>
+        <mat-list-item (click)="logout()">
+          <mat-icon>logout</mat-icon> Đăng xuất
+      </mat-list-item>
     </mat-nav-list>
+</div>
 </div>

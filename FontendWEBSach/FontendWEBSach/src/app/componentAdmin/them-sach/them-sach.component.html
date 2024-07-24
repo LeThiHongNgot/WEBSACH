@@ -1,136 +1,142 @@
 <div class="bookadd">
     <div class="form-left">
-       <app-menu></app-menu>
+        <app-menu></app-menu>
     </div>
-
     <div class="form-right">
         <div class="title">
-          QUẢN LÝ CỬA HÀNG
+            QUẢN LÝ CỬA HÀNG
         </div>
-        <div class="content">
+        <div class="content" *ngIf="Books">
             <div class="name-content">
-                Thêm sách mới
+             {{productId?  "Sửa sách": "Thêm sách"}}
             </div>
             <hr>
-
             <!-- Thêm ảnh -->
             <div class="imgs-add">
-              <div class="img-add">
-                  <label>Chọn ảnh bìa</label>
-                  <input type="file" class="file-upload" (change)="onSelect($event)" accept="image/*" [(ngModel)]="BookImg.image0">
-              </div>
-              <div class="img-add">
-                  <label>Chọn ảnh 1</label>
-                  <input type="file" class="file-upload" (change)="onSelect($event)" accept="image/*" [(ngModel)]="BookImg.image1">
-              </div>
-              <div class="img-add">
-                  <label>Chọn ảnh 2</label>
-                  <input type="file" class="file-upload" (change)="onSelect($event)" accept="image/*" [(ngModel)]="BookImg.image2">
-              </div>
-              <div class="img-add">
-                  <label>Chọn ảnh 3</label>
-                  <input type="file" class="file-upload" (change)="onSelect($event)" accept="image/*" [(ngModel)]="BookImg.image3">
-              </div>
-          </div>
-
-            <!-- Tên sách -->
-            <div class="bookname-add">
-                <label>Tên sách</label>
-                <input type="text" id="bookNameInput" [(ngModel)]="Books.title">
+                <div class="img-add">
+                    <label>Chọn ảnh bìa</label>
+                    <input type="file" class="file-upload" accept="image/*" (change)="onFileSelect($event, 1)">
+                </div>
+                <div class="img-add">
+                    <label>Chọn ảnh 1</label>
+                    <input type="file" class="file-upload" accept="image/*" (change)="onFileSelect($event, 2)">
+                </div>
+                <div class="img-add">
+                    <label>Chọn ảnh 2</label>
+                    <input type="file" class="file-upload" accept="image/*" (change)="onFileSelect($event, 3)">
+                </div>
+                <div class="img-add">
+                    <label>Chọn ảnh 3</label>
+                    <input type="file" class="file-upload" accept="image/*" (change)="onFileSelect($event, 4)">
+                </div>
             </div>
 
+            <!-- Tên sách -->
+            <div class="bookname-year">
+                <div class="bookname">
+                    <label>Tên sách</label>
+                    <input type="text" id="bookNameInput" [(ngModel)]="Books.title">
+                </div>
+                <div class="publish-year">
+                    <label>Năm xuất bản</label>
+                    <input type="number" [(ngModel)]="Books.publishYear" min="1900" max="2100">
+                </div>
+            </div>
             <!-- Tác giả và Thể loại -->
             <div class="aut-cate-add">
                 <div class="author-add">
-                  <div class="group-add">
-                  <label>Tác giả</label>
-                    <button mat-raised-button >Thêm</button>
-                  </div>
-                    <mat-select [(ngModel)]="selectedAuthor">
-                        <mat-option *ngFor="let author of Authors" [value]="author.id">
+                    <div class="group-add">
+                        <label>Tác giả</label>
+                        <button mat-raised-button (click)="openAddAuthorModal()">+ Thêm tác giả</button>
+                    </div>
+                    <mat-select [(ngModel)]="selectedAuthor" #authorSelect>
+                        <mat-option *ngFor="let author of Authors" [value]="author.id" 
+                            (contextmenu)="openDeleteModal($event, author.id ,authorSelect, 'author')">
                             {{ author.name }}
                         </mat-option>
                     </mat-select>
                 </div>
                 <div class="category-add">
-                  <div class="group-add">
-                  <label>Thể loại</label>
-                  <button mat-raised-button >Thêm</button>
-                </div>
-                  <mat-select [(ngModel)]="selectedCategory">
-                    <mat-option *ngFor="let category of Categories" [value]="category.id">{{category.name}}</mat-option>
-                  </mat-select>
-                </div>
-            </div>
-
-            <!-- Nhà xuất bản, Năm xuất bản -->
-            <div class="publish-compant-year">
-                <div class="publish-company">
-                  <div class="group-add">
-                    <label>Nhà xuất bản</label>
-                    <button mat-raised-button >Thêm</button>
-                  </div>
-                    <mat-select [(ngModel)]="selectedSupplier">
-                        <mat-option *ngFor="let supplier of Suppliers" [value]="supplier.id">{{supplier.name}}</mat-option>
+                    <div class="group-add">
+                        <label>Thể loại</label>
+                        <button mat-raised-button (click)="openAddCategoryModal()">+ Thêm thể loại</button>
+                    </div>
+                    <mat-select [(ngModel)]="selectedCategory" #categorySelect>
+                        <mat-option *ngFor="let category of Categories" [value]="category.id"
+                            (contextmenu)="openDeleteModal($event, category.id , categorySelect, 'category')">
+                            {{category.name}}
+                        </mat-option>
                     </mat-select>
                 </div>
-                <div class="publish-year">
-                    <label>Năm xuất bản</label>
-                    <input type="number" [(ngModel)]="Books.yearSX">
+                <div class="publish-company">
+                    <div class="group-add">
+                        <label>Nhà cung cấp</label>
+                        <button mat-raised-button (click)="openAddSuplierModal()">+Thêm nhà cung cấp </button>
+                    </div>
+                    <mat-select [(ngModel)]="selectedSupplier" #categorySelect>
+                        <mat-option *ngFor="let supplier of Suppliers" [value]="supplier.id"
+                        (contextmenu)="openDeleteModal($event, supplier.id , categorySelect, 'supplier')">
+                        {{supplier.name}}</mat-option>
+                    </mat-select>
                 </div>
             </div>
 
-            <!-- Giá và Số lượng -->
             <div class="price-quantity-add">
                 <div class="price-add">
                     <label>Giá</label>
-                    <input type="number" [(ngModel)]="Books.unitprice">
+                    <input type="number" [min]="1000" [(ngModel)]="Books.unitPrice">
                 </div>
                 <div class="quantity-add">
                     <label>Số lượng</label>
-                    <input type="number" [(ngModel)]="Books.quantity">
+                    <input type="number" min="0" [(ngModel)]="Books.quantity">
                 </div>
                 <div class="pricepercent-add">
                     <label>Giảm giá</label>
-                    <input type="number" [(ngModel)]="Books.pricepercent">
+                    <input type="number" [(ngModel)]="Books.pricePercent" step="0.001" min="0">
                 </div>
             </div>
 
             <div class="page-dimension-add">
                 <div class="pages-add">
                     <label>Số trang</label>
-                    <input type="number" [(ngModel)]="Books.pages">
+                    <input type="number" min="0" [(ngModel)]="Books.pages">
                 </div>
                 <div class="dimensions-add">
                     <label>Kích thước</label>
-                    <input type="text" [(ngModel)]="BookDetail.dimensions">
+                    <input type="text" [(ngModel)]="Books.dimensions">
                 </div>
-            </div>
-
-            <!-- Trạng thái -->
-            <div class="status">
-                <label>Trạng thái</label>
-                <mat-select [(ngModel)]="Books.available">
-                  <mat-option [value]="true">Còn bán</mat-option>
-                  <mat-option [value]="false">Ngưng bán</mat-option>
-                </mat-select>
+                <div class="status">
+                    <label>Trạng thái</label>
+                    <mat-select [(ngModel)]="Books.available">
+                        <mat-option [value]="true">Còn bán</mat-option>
+                        <mat-option [value]="false">Ngưng bán</mat-option>
+                    </mat-select>
+                </div>
             </div>
 
             <!-- Mô tả -->
             <div class="description">
                 <label for="descriptionInput">Mô tả</label>
-                <textarea id="descriptionInput" [(ngModel)]="BookDetail.description"></textarea>
+                <textarea id="descriptionInput" [(ngModel)]="Books.description"></textarea>
             </div>
-
             <!-- Nút Hủy và Áp dụng -->
             <div class="btn-cancel-apply">
                 <button mat-raised-button routerLink="/admin">Hủy</button>
-                <button mat-raised-button >Xác nhận</button>
+                <button mat-raised-button (click)="onSave()">Xác nhận</button>
+                <app-add-category *ngIf="isAddCategoryModal"
+                    (closeModalEvent)="isAddCategoryModal = false"></app-add-category>
+                <app-add-author *ngIf="isAddAuthorModal" (closeModalEvent)="closeAddAuthorModal()"></app-add-author>
+                <app-add-suplier *ngIf="isAddSuplierModal"
+                    (closeModalEvent)="isAddSuplierModal = false"></app-add-suplier>
+                <app-modal-xoa
+                [idAuthor]="this.idAuthorDelete"
+                [idCategory]="this.idCategoryDelete"
+                [idSupplier]="this.idSupplierDelete"
+                
+                *ngIf="isDeleteModal"
+                (closeModalEvent)="closeDeleteModal()">
+                </app-modal-xoa>
             </div>
         </div>
-      </div>
+    </div>
 </div>
-
-
-
-

@@ -13,7 +13,7 @@
             <hr>
             <div class="form-MaDon">
                 <div class="order-info">
-                  <span class="label">Mã đơn hàng: {{ this.idOrderCustomer}}</span>
+                  <span class="label">Mã đơn hàng: {{ this.id}}</span>
                 </div>
                 <div class="order-from-to">
                   <div class="from">
@@ -47,7 +47,7 @@
                 </thead>
                 <tbody *ngFor="let b of orderData">
                     <tr >
-                        <td class="left-align">{{b.bookName }}</td>
+                        <td class="left-align">{{b.nameBook}}</td>
                         <td>{{ b.quantity }}</td>
                     </tr>
                 </tbody>
@@ -61,7 +61,7 @@
               </div>
               <div class="order-date">
                 <span class="label">Ngày đặt hàng:</span>
-                <span class="value-gia">{{this.time}}</span>
+                <span class="value-gia">{{ this.time | date: 'yyyy-MM-dd' }}</span>
               </div>
             </div>
         </div>

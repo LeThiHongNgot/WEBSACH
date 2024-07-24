@@ -25,16 +25,12 @@ export class SharedataService {
   setQuantity(quantity: { [key: string]: number }) {
     this.quantitySource.next(quantity);
   }
-  private idCustomerSource = new BehaviorSubject<string>('');
-  idCustomer$ = this.idCustomerSource.asObservable();
+  private idSource = new BehaviorSubject<string>('');
+  idbill$ = this.idSource.asObservable();
 
-  private timeSource = new BehaviorSubject<string>('');
-  time$ = this.timeSource.asObservable();
-
-  setOrder(idCustomer:string,time:string)
+  setOrder(id:string)
   {
-    this.idCustomerSource.next(idCustomer);
-    this.timeSource.next(time);
+    this.idSource.next(id);;
   }
 
   private totalRevenueSource = new Subject<number>();

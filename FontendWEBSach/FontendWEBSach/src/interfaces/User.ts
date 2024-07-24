@@ -4,6 +4,5 @@ export interface User {
     password: string,
     email: string,
     phone: string,
-    Bills: any[],
-    UserRoles: any[]
+    role:string
 }

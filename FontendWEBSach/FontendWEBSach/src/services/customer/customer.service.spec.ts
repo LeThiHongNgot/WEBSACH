@@ -1,6 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-
-import { CustomerService } from './customer.service';
+import { CustomerService } from 'src/services/customer/customer.service'; 
 
 describe('CustomerService', () => {
   let service: CustomerService;

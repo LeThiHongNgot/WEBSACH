@@ -22,7 +22,6 @@ export class StaffAdminComponent {
     this.users.Users().subscribe({
       next: res => {
         this.Users = res;
-        console.log(res)
         this.loadpro(null);
       },
       error: err => {
@@ -30,21 +29,17 @@ export class StaffAdminComponent {
       }
     })
   }
-
-
   assets: any;
 
   isDeleteModalVisible = false;
 
   loadpro(searchTerm: string | null) {
     if (searchTerm && searchTerm.trim() !== '') {
-      // Filter the books based on the search term
       this.filteredUsers = this.Users.filter(user =>
         user.fullName.toLowerCase().includes(searchTerm.toLowerCase())
       );
     } else {
-      // If no search term or an empty search term, show all books
-      this.filteredUsers = this.Users.slice(0, 25); // Or simply assign this.filteredBooks = this.Books; for all books
+      this.filteredUsers = this.Users.slice(0, 25);
     }
     console.log(this.filteredUsers)
   }

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using QLCHS.DTO;
 using QLCHS.Entities;
 
 namespace QLCHS.Controllers
@@ -118,11 +119,13 @@ namespace QLCHS.Controllers
                 return NotFound($"No product reviews found for BookId: {bookId}");
             }
 
+
             // Calculate the average rating
             var averageRating = productReviews.Average(pr => pr.Rating);
 
             return Ok(averageRating);
         }
+
         [HttpGet("books/{bookId}/ratings")]
         public async Task<ActionResult<IEnumerable<object>>> GetRatingCountsForBook(string bookId)
         {
@@ -157,15 +160,17 @@ namespace QLCHS.Controllers
         }
         [HttpGet("outstanding")]
         public async Task<ActionResult<IEnumerable<BookDetailsViewModel>>> GetBookDetailsWithImages(
-    [FromQuery] int page = 1,
-    [FromQuery] int pageSize = 1)
+     [FromQuery] int page = 1,
+     [FromQuery] int pageSize = 1)
         {
+            var baseUrl = $"{Request.Scheme}://{Request.Host}";
+
             var query = from book in _context.Books
                         join bookDetail in _context.Bookdetails on book.Id equals bookDetail.BookId
                         join bookImg in _context.Bookimgs on book.Id equals bookImg.BookId
                         let averageRating = _context.ProductReviews
-                                            .Where(pr => pr.BookId == book.Id)
-                                            .Average(pr => pr.Rating)
+                                                .Where(pr => pr.BookId == book.Id)
+                                                .Average(pr => (double?)pr.Rating) ?? 0
                         where averageRating == 5
                         select new BookDetailsViewModel
                         {
@@ -178,15 +183,16 @@ namespace QLCHS.Controllers
                             PublishYear = book.PublishYear,
                             Available = book.Available,
                             Quantity = book.Quantity,
-                            CatergoryID = book.Bookdetail.CategoryId,
-                            CategoryName = book.Bookdetail.Category.Name,
-                            Dimensions = book.Bookdetail.Dimensions,
-                            Pages = book.Bookdetail.Pages,
-                            Description = book.Bookdetail.Description,
-                            Image0 = book.Bookimg.Image0,
-                            Image1 = book.Bookimg.Image1,
-                            Image2 = book.Bookimg.Image2,
-                            Image3 = book.Bookimg.Image3
+                            CatergoryID = bookDetail.CategoryId,
+                            CategoryName = bookDetail.Category.Name,
+                            Dimensions = bookDetail.Dimensions,
+                            Pages = bookDetail.Pages,
+                            Description = bookDetail.Description,
+                            Image0 = $"{baseUrl}/{bookImg.Image0}",
+                            Image1 = $"{baseUrl}/{bookImg.Image1}",
+                            Image2 = $"{baseUrl}/{bookImg.Image2}",
+                            Image3 = $"{baseUrl}/{bookImg.Image3}",
+                            AverageRating = averageRating  // Bao gồm thuộc tính này
                         };
 
             var totalCount = await query.CountAsync();
@@ -198,6 +204,7 @@ namespace QLCHS.Controllers
 
             return Ok(new { TotalCount = totalCount, Data = result });
         }
+
 
 
 
@@ -219,10 +226,12 @@ namespace QLCHS.Controllers
             return productReview;
         }
         [HttpGet("GetBookReview")]
-        public async Task<ActionResult<IEnumerable<BookDetailsViewModel>>> GetBookReview(
-        [FromQuery] int page = 1,
-        [FromQuery] int pageSize = 10)
+        public async Task<ActionResult<IEnumerable<BookAvgPView>>> GetBookReview(
+     [FromQuery] int page = 1,
+     [FromQuery] int pageSize = 10)
         {
+            var baseUrl = $"{Request.Scheme}://{Request.Host}";
+
             var query = from book in _context.Books
                         join bookDetail in _context.Bookdetails on book.Id equals bookDetail.BookId
                         join bookImg in _context.Bookimgs on book.Id equals bookImg.BookId
@@ -243,17 +252,18 @@ namespace QLCHS.Controllers
                             PublishYear = book.PublishYear,
                             Available = book.Available,
                             Quantity = book.Quantity,
-                            CatergoryID = book.Bookdetail.CategoryId,
-                            CategoryName = book.Bookdetail.Category.Name,
-                            Dimensions = book.Bookdetail.Dimensions,
-                            Pages = book.Bookdetail.Pages,
-                            Description = book.Bookdetail.Description,
+                            CatergoryID = bookDetail.CategoryId,
+                            CategoryName = bookDetail.Category.Name,
+                            Dimensions = bookDetail.Dimensions,
+                            Pages = bookDetail.Pages,
+                            Description = bookDetail.Description,
                             AverageRating = averageRating, // Include average rating
-                            Image0 = book.Bookimg.Image0,
-                            Image1 = book.Bookimg.Image1,
-                            Image2 = book.Bookimg.Image2,
-                            Image3 = book.Bookimg.Image3,
+                            Image0 = $"{baseUrl}/{bookImg.Image0}",
+                            Image1 = $"{baseUrl}/{bookImg.Image1}",
+                            Image2 = $"{baseUrl}/{bookImg.Image2}",
+                            Image3 = $"{baseUrl}/{bookImg.Image3}",
                         };
+
             var totalCount = await query.CountAsync();
 
             var result = await query
@@ -263,6 +273,7 @@ namespace QLCHS.Controllers
 
             return Ok(new { TotalCount = totalCount, Data = result });
         }
+
 
         // PUT: api/ProductReviews/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
@@ -298,12 +309,23 @@ namespace QLCHS.Controllers
         // POST: api/ProductReviews
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<ProductReview>> PostProductReview(ProductReview productReview)
+        public async Task<ActionResult<ProductReviewtOTP>> PostProductReview(ProductReviewtOTP productReviewDto)
         {
-          if (_context.ProductReviews == null)
-          {
-              return Problem("Entity set 'QLBANSACHContext.ProductReviews'  is null.");
-          }
+            if (_context.ProductReviews == null)
+            {
+                return Problem("Entity set 'QLBANSACHContext.ProductReviews' is null.");
+            }
+
+            var productReview = new ProductReview
+            {
+                Id = Guid.NewGuid().ToString(), // Tạo ID mới
+                CustomerId = productReviewDto.CustomerId,
+                BookId = productReviewDto.BookId,
+                Rating = productReviewDto.Rating,
+                Comment = productReviewDto.Comment,
+                NgayCommemt = productReviewDto.NgayCommemt
+            };
+
             _context.ProductReviews.Add(productReview);
             try
             {

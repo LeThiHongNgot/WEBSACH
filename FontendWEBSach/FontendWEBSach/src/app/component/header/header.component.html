@@ -1,5 +1,4 @@
-
-  <div class="header"  [ngClass]="{'header-no-zindex': isModalVisible}">
+<div class="header" [ngClass]="{'header-no-zindex': isModalVisible}">
     <!-- Top Section -->
     <div class="header-top">
         <!-- Logo -->
@@ -9,19 +8,22 @@
 
         <!-- Search Bar -->
         <div class="search-container">
-          <input type="text" [(ngModel)]="product.name" name="name"placeholder="Tìm kiếm..." class="search-input" (input)="loadpro(product.name)">
-          <button class="search-btn">
-              <mat-icon class="search-icon" >search</mat-icon>
-          </button>
-          <div class="dropdown" id="dropdown">
-              <div class="cartegory-right-bottom-item" *ngFor="let product of filteredProducts" (click)="navigateToProduct(product.id)">
-                  <div class="productIMG" >
-                    <img [src]="getBookImage(product.id)">
-                  </div>
-                  <span class=" btn-outline-secondary" placement="bottom" ngbTooltip={{product.title}}>{{ product.title }}</span>
+            <input type="text" [(ngModel)]="product.name" name="name" placeholder="Tìm kiếm..." class="search-input"
+                (input)="loadpro(product.name)">
+            <button class="search-btn">
+                <mat-icon class="search-icon">search</mat-icon>
+            </button>
+            <div class="dropdown" id="dropdown">
+                <div class="cartegory-right-bottom-item" *ngFor="let product of filteredProducts"
+                    (click)="navigateToProduct(product.id)">
+                    <div class="productIMG">
+                        <img [src]="getBookImage(product.id)">
+                    </div>
+                    <span class=" btn-outline-secondary" placement="bottom" ngbTooltip={{product.title}}>{{
+                        product.title }}</span>
                 </div>
-          </div>
-      </div>
+            </div>
+        </div>
 
         <!-- matBadge="15" matBadgeColor="warn" -->
         <!-- Action Buttons -->
@@ -46,15 +48,16 @@
 
     <!-- Navigation Bar -->
     <nav class="nav-bar">
-      <button class="nav-item" routerLink="">TRANG CHỦ</button>
+        <button class="nav-item" routerLink="">TRANG CHỦ</button>
 
-      <button class="nav-item" mat-button [matMenuTriggerFor]="theloai">THỂ LOẠI</button>
-      <mat-menu #theloai="matMenu" yPosition="above">
-          <button mat-menu-item *ngFor="let category of categories" (click)="navigateToCategory(category.id)">
-              {{category.name}}
-          </button>
-      </mat-menu>
-      <button class="nav-item" mat-button (click)="openMapModal()">CỬA HÀNG</button>
-      <app-map *ngIf="isMapModalVisible" (closeModalEvent)="isMapModalVisible = false"></app-map>
-      <button class="nav-item" routerLink="">THÔNG TIN</button>
-  </nav>
+        <button class="nav-item" mat-button [matMenuTriggerFor]="theloai">THỂ LOẠI</button>
+        <mat-menu #theloai="matMenu" yPosition="above">
+            <button mat-menu-item *ngFor="let category of categories" (click)="navigateToCategory(category.id)">
+                {{category.name}}
+            </button>
+        </mat-menu>
+        <button class="nav-item" mat-button (click)="openMapModal()">CỬA HÀNG</button>
+        <app-map *ngIf="isMapModalVisible" (closeModalEvent)="isMapModalVisible = false"></app-map>
+        <button class="nav-item" routerLink="">THÔNG TIN</button>
+    </nav>
+</div>

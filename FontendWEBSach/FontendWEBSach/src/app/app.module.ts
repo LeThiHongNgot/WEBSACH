@@ -54,7 +54,6 @@ import { CommentComponent } from './componentAdmin/comment/comment.component';
 import { MenuComponent } from './componentAdmin/menu/menu.component';
 import { ModalAddStaffComponent } from './componentAdmin/modal-add-staff/modal-add-staff.component';
 import { ModalAddVoucherComponent } from './componentAdmin/modal-add-voucher/modal-add-voucher.component';
-import { ModalEditVoucherComponent } from './componentAdmin/modal-edit-voucher/modal-edit-voucher.component';
 import { ModalXoaComponent } from './componentAdmin/modal-xoa/modal-xoa.component';
 import { OrderAdminComponent } from './componentAdmin/order-admin/order-admin.component';
 import { OrderDetailComponent } from './componentAdmin/order-detail/order-detail.component';
@@ -62,12 +61,18 @@ import { OrderNotCompleteComponent } from './componentAdmin/order-not-complete/o
 import { RevenueAdminComponent } from './componentAdmin/revenue-admin/revenue-admin.component';
 import { SachComponent } from './componentAdmin/sach/sach.component';
 import { StaffAdminComponent } from './componentAdmin/staff-admin/staff-admin.component';
-import { SuaSachComponent } from './componentAdmin/sua-sach/sua-sach.component';
 import { ThemSachComponent } from './componentAdmin/them-sach/them-sach.component';
 import { UserAdminComponent } from './componentAdmin/user-admin/user-admin.component';
 import { VoucherAdminComponent } from './componentAdmin/voucher-admin/voucher-admin.component';
 import { ModalApceptComponent } from './componentAdmin/modal-apcept/modal-apcept.component';
 import { ModalAddStakholderbookComponent } from './componentAdmin/modal-add-stakholderbook/modal-add-stakholderbook.component';
+import { AddAuthorComponent } from './componentAdmin/add-author/add-author.component';
+import { AddCategoryComponent } from './componentAdmin/add-category/add-category.component';
+import { AddSuplierComponent } from './componentAdmin/add-suplier/add-suplier.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { LoginadminComponent } from './pages/loginadmin/loginadmin.component';
+import { ProductslistComponent } from './component/productslist/productslist.component';
+
 
 @NgModule({
   declarations: [
@@ -91,7 +96,6 @@ import { ModalAddStakholderbookComponent } from './componentAdmin/modal-add-stak
     MenuComponent,
     ModalAddStaffComponent,
     ModalAddVoucherComponent,
-    ModalEditVoucherComponent,
     ModalXoaComponent,
     OrderAdminComponent,
     OrderDetailComponent,
@@ -99,12 +103,16 @@ import { ModalAddStakholderbookComponent } from './componentAdmin/modal-add-stak
     RevenueAdminComponent,
     SachComponent,
     StaffAdminComponent,
-    SuaSachComponent,
     ThemSachComponent,
     UserAdminComponent,
     VoucherAdminComponent,
     ModalApceptComponent,
     ModalAddStakholderbookComponent,
+    AddAuthorComponent,
+    AddCategoryComponent,
+    AddSuplierComponent,
+    LoginadminComponent,
+    ProductslistComponent,
   ],
   imports: [
     BrowserModule,
@@ -137,7 +145,9 @@ import { ModalAddStakholderbookComponent } from './componentAdmin/modal-add-stak
     NgxViacepModule,
     ReactiveFormsModule,
     MatAutocompleteModule,
-    CloudinaryModule
+    CloudinaryModule,
+    MatDialogModule,
+    FormsModule,
   ],
 
   providers: [],

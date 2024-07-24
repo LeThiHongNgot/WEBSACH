@@ -12,7 +12,7 @@ namespace QLCHS.Entities
         public string? Comment { get; set; }
         public DateTime? NgayCommemt { get; set; }
 
-        public virtual Book? Book { get; set; } 
-        public virtual Customer? Customer { get; set; }
+        public virtual Book Book { get; set; } = null!;
+        public virtual Customer Customer { get; set; } = null!;
     }
 }

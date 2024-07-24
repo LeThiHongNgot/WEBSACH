@@ -6,11 +6,10 @@
 }
 
 .form-left {
-  flex: 1;
-  flex-direction: column;
-  background-color: #e9eaee;
+  width: 300px;
   min-height: 100vh;
   margin-right: 2%;
+  background-color: #e9eaee;
   padding: 20px;
   position: sticky;
   top: 0;
@@ -19,7 +18,7 @@
 }
 
 .form-right {
-  flex: 5;
+  flex-grow: 1;
   overflow-y: auto;
   padding-right: 2%;
 }
@@ -92,7 +91,8 @@ mat-raised-button {
   margin-top: 20px;
 }
 
-.info-table th, .info-table td {
+.info-table th,
+.info-table td {
   border: none;
   padding: 8px;
   text-align: center;
@@ -122,16 +122,18 @@ mat-raised-button {
 mat-icon {
   margin-right: 5px;
 }
-.bookimage{
+
+.bookimage {
   max-width: 100px;
   max-height: 100px;
   object-fit: cover;
 }
-.see-more-container{
-display: flex;
-width: 100%;
-justify-content: center;
-align-items: center;
-margin: 20px;
-z-index: 0;
+
+.see-more-container {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+  z-index: 0;
 }

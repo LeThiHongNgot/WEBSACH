@@ -26,8 +26,8 @@ export class SupliersService {
   }
 
   // Delete a supplier by ID
-  deleteSupplierId(id: string) {
-    return this.http.delete<any>(`${this.baseUrl}Suppliers/${id}`);
+  deleteSupplierId(supplierid: string) {
+    return this.http.delete<any>(`${this.baseUrl}Suppliers/${supplierid}`);
   }
   // Update information of an existing supplier
   updateSupplier(supplier: any) {

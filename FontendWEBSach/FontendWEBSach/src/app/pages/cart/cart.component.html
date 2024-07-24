@@ -47,7 +47,7 @@
                         <input type="number" placeholder="1"  min="1" max="{{ cart.quantity }}" [(ngModel)]="quantity[cart.bookId]" (ngModelChange)="updateQuantity(cart.bookId, quantity[cart.bookId])">
                       </div>
                     </td>
-                    <td >
+                    <td>
                       {{ ((quantity[cart.bookId] != null ? quantity[cart.bookId] : 1) * percent1(cart.unitPrice, cart.pricePercent)) | number:'1.0-0' }}<sup>đ</sup>
                     </td>
                     <td>

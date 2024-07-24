@@ -6,63 +6,72 @@ import { AuthorsService } from 'src/services/Authors/authors.service';
 import { CategoriesService } from 'src/services/Categories/categories.service';
 import { SupliersService } from 'src/services/Supliers/supliers.service';
 import { BooksService } from 'src/services/Books/books.service';
-import { bookhome } from 'src/interfaces/bookhome';
-import { BookDetailsService } from 'src/services/BookDetails/bookdetails.service';
-import { BookImgsService } from 'src/services/BookImgs/bookimgs.service';
-import { BookDetail} from  'src/interfaces/bookdetail';
-import { bookimg } from 'src/interfaces/bookimg';
-// Import the CloudinaryModule.
-import {CloudinaryModule} from '@cloudinary/ng';
+import { MatSelect } from '@angular/material/select';
+import { MatDialog } from '@angular/material/dialog';
+import { ActivatedRoute } from '@angular/router';
 
-// Import the Cloudinary classes.
-import {Cloudinary, CloudinaryImage} from '@cloudinary/url-gen'
 @Component({
   selector: 'app-them-sach',
   templateUrl: './them-sach.component.html',
   styleUrls: ['./them-sach.component.css'],
 })
 export class ThemSachComponent {
-  constructor(private authors: AuthorsService, private categories: CategoriesService,
-     private suppliers: SupliersService, private booksservice:BooksService
-     ,private bookimgservice:BookImgsService,private bookDetailservice:BookDetailsService) {}
-  Authors: Author[]=[];
-  Categories: Category[]=[];
-  Suppliers: Supplier[]=[];
-  Books:any = {}
-  BookDetail:any = {}
-  BookImg:any = {}
+  constructor(private authors: AuthorsService,
+    private categories: CategoriesService,
+    private suppliers: SupliersService,
+    private booksservice: BooksService,
+    public dialog: MatDialog,
+    private route: ActivatedRoute
+
+  ) { }
+  Authors: Author[] = [];
+  Categories: Category[] = [];
+  Suppliers: Supplier[] = [];
+  Books: any = {}
   selectedAuthor: any = {};
   selectedCategory: any = {};
   selectedSupplier: any = {};
   BookDataForm: any = {};
   BookCount: any;
-  checkdetail:boolean=false;
-  checkimge:boolean=false;
-  img!: CloudinaryImage;
-  publicIdPost!: string;
-  imgFromUser!: CloudinaryImage;
-  cloudName = "dpk9xllkq";
-  uploadPreset = "Angular_Products";
+  checkdetail: boolean = false;
+  checkimge: boolean = false;
   userImageSrc!: string;
-  file!: File | null;
-  ngOnInit()
-  {
+  selectedFiles: File[] = [];
+  productId: string | null = null;
+  idAuthorDelete: string = "";
+  idCategoryDelete: string = "";
+  idSupplierDelete: string = "";
+
+  ngOnInit() {
+    this.loadCategories();
+    this.route.paramMap.subscribe(params => {
+      this.productId = params.get('bookId');
+      if (this.productId) {
+        this.booksservice.getBookDetailsWithImagesid(this.productId).subscribe({
+          next: (res) => {
+            this.Books = res;
+            this.selectedAuthor = res.authorId
+            this.selectedSupplier = res.supplierid
+            this.selectedCategory = res.catergoryID
+          },
+          error: (err) => {
+            console.error('Error fetching data', err);
+          }
+        });
+      }
+    });
+
+
     this.authors.Authors().subscribe({
       next: (res) => {
         this.Authors = res
+        console.log(res)
       },
       error: (err) => {
         console.error('Lỗi lấy dữ liệu ', err)
       }
     });
-    this.categories.Categories().subscribe({
-      next: (res) => {
-          this.Categories = res;
-      },
-      error: (err) => {
-          console.error('Lỗi lấy dữ liệu ', err);
-      }
-    });
+
     this.suppliers.Suppliers().subscribe({
       next: (res) => {
         this.Suppliers = res
@@ -73,36 +82,141 @@ export class ThemSachComponent {
     });
     this.booksservice.countBook().subscribe({
       next: res => {
-        this.BookCount = 'B'+(res*1+1*1);
+        this.BookCount = 'B' + (res * 1 + 1 * 1);
       },
       error: err => {
         console.log('Lỗi lấy dữ liệu: ', err);
       }
     });
-    const cld = new Cloudinary({cloud: {cloudName: 'ddlsouigc'}});
+
+  }
+  loadCategories(){
+    this.categories.Categories().subscribe({
+      next: (res: any) => {
+        this.Categories = res; 
+      },
+      error: (err) => {
+        console.error('Lỗi lấy dữ liệu', err);
+      }
+    });
+  }
+  //chọn sách
+  onFileSelect(event: any, index: number): void {
+    this.selectedFiles[index] = event.target.files[0];
   }
 
-  async onSelect(event: any): Promise<void> {
-    const inputFile = event.target as HTMLInputElement;
-    const bookId = "20003"; // Assuming you have the book ID stored somewhere
-
-    if (inputFile && inputFile.files && inputFile.files.length > 0) {
-        const files: FileList = inputFile.files;
-        const data = new FormData();
-        // Append all selected files to FormData
-        for (let i = 0; i < files.length; i++) {
-            data.append('files[]', files[i]);
+  onSave() {
+    const formData = new FormData();
+      formData.append('id', "");
+      formData.append('title', this.Books.title || "");
+      formData.append('authorId', this.selectedAuthor || "");
+      formData.append('supplierId', this.selectedSupplier || "");
+      formData.append('unitPrice', this.Books.unitPrice || 0);
+      formData.append('pricePercent', this.Books.pricepercent || 0);
+      formData.append('publishYear', this.Books.yearSX || 0);
+      formData.append('available', 'true');
+      formData.append('quantity', this.Books.quantity || 0);
+      formData.append('catergoryID', this.selectedCategory || "");
+      formData.append('dimensions', this.Books.dimensions || "");
+      formData.append('pages', this.Books.pages || 0);
+      formData.append('description', this.Books.description || "");
+    // Append images if selectedFiles contains file objects
+      if (this.selectedFiles && this.selectedFiles.length > 0) {
+        for (let i = 1; i <= 4; i++) {
+          if (this.selectedFiles[i]) {
+            formData.append(`image${i - 1}`, this.selectedFiles[i]);
+          }
         }
-        // Append book ID, upload preset, and cloud name
-        data.append('bookId', bookId);
-        data.append('upload_preset', 'Angular_Products');
-        data.append('cloud_name', 'dpk9xllkq');
+      }
+    if (this.productId) {
+      formData.append('id', this.productId);
+      this.booksservice.updateBook(formData).subscribe({
+        next: (res) => {
+          alert("Thêm thành công");
+        },
+        error: (err) => {
+          console.error('Lỗi thêm vào', err);
+        },
+      });
+      console.log(formData);
+    } else {
 
-        // Upload images and handle response
-
+      this.booksservice.postBook(formData).subscribe({
+        next: (res) => {
+          alert("Thêm thành công");
+        },
+        error: (err) => {
+          console.error('Lỗi thêm vào', err);
+        },
+      });
     }
+    
+  }
+
+  isDeleteModal = false;
+  isEditModal = false;
+  isAddCategoryModal = false;
+  idDelete: any;
+  isAddAuthorModal = false;
+  isAddSuplierModal = false;
+  isDeleteModalVisible = false;
+  // Hiển thị modal add
+  openAddCategoryModal() {
+    this.isAddCategoryModal = true;
+  }
+
+  // Đóng modal add
+  closeAddtCategoryModal() {
+    this.isAddCategoryModal = false;
+  }
+
+  // Hiển thị modal add
+  openAddAuthorModal() {
+    this.isAddAuthorModal = true;
+  }
+
+  // Đóng modal add author
+  closeAddAuthorModal() {
+    this.isAddAuthorModal = false;
+  }
+
+  openAddSuplierModal() {
+    this.isAddSuplierModal = true;
+  }
+
+  // Đóng modal add
+  closeAddSuplierModal() {
+    this.isAddSuplierModal = false;
+  }
+
+  // Hiển thị modal xác nhận xóa
+  openDeleteModal(event: MouseEvent, id: any, select: MatSelect, entityType: string) {
+    event.preventDefault();
+    switch (entityType) {
+      case 'author':
+        this.idAuthorDelete = id;
+        break;
+      case 'category':
+        this.idCategoryDelete = id;
+        break;
+      case 'supplier':
+        this.idSupplierDelete = id;
+        break;
+      default:
+        break;
+    }
+    this.isDeleteModal = true;
+    select.close();
+  }
+  
+
+  // Đóng modal xác nhận xóa
+  closeDeleteModal() {
+    this.isDeleteModal = false;
+  }
 }
 
 
 
-}
+
+

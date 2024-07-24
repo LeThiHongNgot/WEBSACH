@@ -1,0 +1,49 @@
+<div class="topComponent">
+	<div class="main">
+		<input type="checkbox" id="chk" aria-hidden="true">
+
+			<div class="login">
+				<form>
+					<label for="chk" aria-hidden="true">Đăng nhập</label>
+					<input type="email" name="email" placeholder="Email" [(ngModel)]="DataLogin.email" required="">
+					<input type="password" name="pswd" placeholder="Mật khẩu" [(ngModel)]="DataLogin.password" required="">
+					<button (click)="login()">Đăng nhập</button>
+					<button style="background: none;"></button>
+				</form>
+			</div>
+
+			<div class="forgetPass">
+
+				<form>
+					<label for="chk" aria-hidden="true">Quên mật khẩu?</label>
+          <form *ngIf="!otpSent && !otpVerified" (ngSubmit)="sendOtp()">
+            <input type="email" name="email" [(ngModel)]="DataForget.email" placeholder="Nhập Email/SĐT Để Nhận OTP" required>
+            <button type="submit">Gửi OTP</button>
+          </form>
+
+          <form *ngIf="otpSent && !otpVerified" (ngSubmit)="verifyOtp()">
+            <label for="otp">Nhập mã OTP tại đây:</label>
+            <div class="otp-container">
+              <input type="text" name="otp1" maxlength="1" [(ngModel)]="otp[0]" (input)="onOtpInput($event, 'otp2')" required #otp1>
+              <input type="text" name="otp2" maxlength="1" [(ngModel)]="otp[1]" (input)="onOtpInput($event, 'otp3')" required #otp2>
+              <input type="text" name="otp3" maxlength="1" [(ngModel)]="otp[2]" (input)="onOtpInput($event, 'otp4')" required #otp3>
+              <input type="text" name="otp4" maxlength="1" [(ngModel)]="otp[3]" (input)="onOtpInput($event, 'otp5')" required #otp4>
+              <input type="text" name="otp5" maxlength="1" [(ngModel)]="otp[4]" (input)="onOtpInput($event, 'otp6')" required #otp5>
+              <input type="text" name="otp6" maxlength="1" [(ngModel)]="otp[5]" required #otp6>
+            </div>
+            <button type="submit" [disabled]="otp.join('').length !== 6">Verify OTP</button>
+          </form>
+
+
+
+          <form *ngIf="otpVerified" (ngSubmit)="resetPassword()">
+            <input type="password" name="newPassword" [(ngModel)]="newPassword" placeholder="Nhập mật khẩu mới" required>
+            <input type="password" name="confirmPassword" [(ngModel)]="confirmPassword" placeholder="Nhập lại mật khẩu" required>
+            <button type="submit">Reset Password</button>
+          </form>
+
+          <p>{{ message }}</p>
+				</form>
+			</div>
+	</div>
+</div>

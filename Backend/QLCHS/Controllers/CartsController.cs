@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using QLCHS.DTO;
 using QLCHS.Entities;
 
 namespace QLCHS.Controllers
@@ -96,20 +97,31 @@ namespace QLCHS.Controllers
         // POST: api/Carts
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Cart>> PostCart(Cart cart)
+        public async Task<ActionResult<CartDTO>> PostCart(CartDTO cartDTO)
         {
-          if (_context.Carts == null)
-          {
-              return Problem("Entity set 'QLBANSACHContext.Carts'  is null.");
-          }
+            if (_context == null || _context.Carts == null)
+            {
+                return Problem("Entity set 'QLCHSContext.Carts' is null or context is not properly initialized.");
+            }
+
+            // Map CartDTO to Cart entity
+            var cart = new Cart
+            {
+                Id = cartDTO.Id,
+                BookId = cartDTO.BookId,
+                CustomerId = cartDTO.CustomerId
+                // Map other properties as needed
+            };
+
             _context.Carts.Add(cart);
+
             try
             {
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateException)
             {
-                if (CartExists(cart.Id))
+                if (CartExists(cart.Id)) // Adjust if CartExists checks other fields
                 {
                     return Conflict();
                 }
@@ -119,8 +131,9 @@ namespace QLCHS.Controllers
                 }
             }
 
-            return CreatedAtAction("GetCart", new { id = cart.Id }, cart);
+            return CreatedAtAction("GetCart", new { id = cart.Id }, cartDTO);
         }
+
 
         // DELETE: api/Carts/5
         [HttpDelete("{id}")]

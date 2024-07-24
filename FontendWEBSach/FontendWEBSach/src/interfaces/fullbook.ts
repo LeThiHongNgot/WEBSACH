@@ -4,7 +4,7 @@ export interface BookDetailsViewModel {
   authorName: string;
   authorId: string;
   supplierName: string;
-  supplierId: string;
+  supplierid: string;
   unitPrice: number; // Using optional property
   pricePercent: number;
   publishYear: number;
@@ -22,3 +22,26 @@ export interface BookDetailsViewModel {
   image2: string;
   image3: string;
 }
+
+export interface fullBook {
+  bookId: string;
+  title: string;
+  authorId: string;
+  supplierId: string;
+  unitPrice: number; // Using optional property
+  pricePercent: number;
+  publishYear: number;
+  available?: boolean;
+  quantity?: number;
+  catergoryID:string;
+  dimensions: string;
+  avage:number;
+  pages?: number; // Using optional property
+  description: string;
+  averageRating:number;
+  image0: string;
+  image1: string;
+  image2: string;
+  image3: string;
+}
+

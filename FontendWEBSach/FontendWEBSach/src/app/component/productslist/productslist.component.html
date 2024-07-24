@@ -1,0 +1,25 @@
+<div class="product-relatedproduct-bottom ">
+  <div class="cartegory-right-bottom-item" *ngFor="let product of products"
+      (click)="navigateToProduct(product.bookId, product.title)">
+      <div class="productIMG">
+          <img [src]="product.image0">
+      </div>
+      <h1 class=" btn-outline-secondary me-2" placement="top" ngbTooltip={{product.title}}>{{ product.title }}</h1>
+      <div class="product-right-price">
+          <p>{{percent1(product.unitPrice,product.pricePercent) | number:'1.0-0'}}<sup>đ</sup></p>
+          <div *ngIf="product.pricePercent > 0" class="gg">
+              <p class="thoughtline">{{product.unitPrice | number:'1.0-0'}}<sup>đ</sup></p>
+              <p>{{percent2(product.pricePercent)}}</p>
+          </div>
+      </div>
+
+      <div class="product-rating">
+          <app-rating-decimal [rating]="product.averageRating"></app-rating-decimal>
+      </div>
+  </div>
+
+</div>
+<div class="see-more-container">
+  <ngb-pagination color="pink" [collectionSize]="loadedBooksCount" (pageChange)="onPageChange($event)" [pageSize]="pageSize"
+      [(page)]="page" aria-label="Default pagination"></ngb-pagination>
+</div>

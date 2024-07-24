@@ -6,7 +6,8 @@ body {
     font-size: 14px;
     color: #000;
 }
-*{
+
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -18,22 +19,18 @@ footer {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    /* margin-top: 30px; */
-    padding: 20px 40px;
+    padding: 0px 40px;
     background-color: #f5f5f5;
     width: 100%;
 }
-
-.footer-top {
-    width: 70%;
+.footer-logo{
     display: flex;
-    flex-direction: column;
     align-items: center;
-    padding-left: 20px;
+    justify-content: center;
 }
 
 .footer-logo .logo {
-    width: 100%;
+    width: 50%;
     margin-bottom: 0;
 }
 
@@ -47,14 +44,15 @@ footer {
     outline: none;
     font-size: 13px;
     text-align: center;
+    margin: 10px 0;
 }
 
 .email-input input:focus {
     border-color: #333;
 }
 
-.italic-text {
-    font-style: italic;
+h4 {
+    font-size: 16px;
 }
 
 footer p {
@@ -63,50 +61,9 @@ footer p {
 }
 
 .contact-info {
+    flex: 1;
     text-align: left;
     padding: 30px 0 0 20px;
-}
-
-.contact-info h2 {
-    font-weight: bold;
-    text-transform: uppercase;
-}
-
-.bold-text {
-    font-weight: bold;
-}
-
-.contact-info p {
-    margin: 5px 0;
-
-}
-
-.space {
-    margin: 20px;
-}
-
-.contact-info {
-    text-align: left;
-    padding-left: 20px;
-}
-
-.contact-info h3 {
-    font-weight: bold;
-    text-transform: uppercase;
-}
-
-.bold-text {
-    font-weight: bold;
-}
-
-.contact-info p {
-    margin: 5px 0;
-    font-size: 14px;
-}
-
-.footer-logo .logo {
-    width: 250px;
-    margin: 0;
 }
 
 .footer-bottom {
@@ -117,21 +74,12 @@ footer p {
     padding-top: 20px;
 }
 
-.footer-left, .footer-right {
+.footer-left,
+.footer-right {
     display: flex;
+    flex: 1;
     flex-direction: column;
     align-items: center;
-}
-
-.bo-tb-logo {
-    width: 230px;
-    margin-bottom: 10px;
-}
-
-.social-icons, .download-icons {
-    display: flex;
-    gap: 10px;
-    margin: 10px 0;
 }
 
 .icon-btn {
@@ -146,51 +94,7 @@ footer p {
     height: auto;
 }
 
-.download-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.bottom-logo {
-    width: 200px; /* bạn có thể điều chỉnh kích thước này */
-    margin-bottom: 10px;
-}
-
-.download-icons img {
-    width: 150px; /* kích thước của các icon tải ứng dụng */
+.pay-logo {
+    width: 500px;
     height: auto;
-}
-
-.footer-right .pay-logo {
-    width: 500px; /* bạn có thể điều chỉnh kích thước này */
-    height: auto;
-}
-
-.email-input input {
-    padding: 10px 0;
-    border: none;
-    border-bottom: 1px solid #ccc;
-    background-color: transparent;
-    width: 100%;
-    max-width: 500px;
-    outline: none;
-    font-size: 13px;
-    text-align: center;
-}
-
-.email-input input:focus {
-    border-color: #333;
-}
-
-.italic-text {
-    font-style: italic;
-}
-
-.mat-icon-map{
-  cursor: pointer;
-}
-
-.mat-icon{
-  margin-bottom: -5px;
 }

@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
+import { HttpClient ,HttpHeaders} from "@angular/common/http";
 import { Router } from '@angular/router';
 import {BookDetailsViewModel} from 'src/interfaces/fullbook';
 import { Observable } from 'rxjs';
-import { bookhome } from 'src/interfaces/bookhome';
 @Injectable({
   providedIn: 'root'
 })
@@ -21,7 +20,8 @@ export class BooksService {
   //get theo id 3 bảng book
   getBookDetailsWithImagesid(bookId: string) {
     const url = `${this.baseUrl}Books/details/images/${bookId}`;
-    return this.http.get<BookDetailsViewModel>(url);
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.get<BookDetailsViewModel>(url,{headers:headers});
   }
   //get gop 3 bảng book lại với nhau
   getBookDetailImages() {
@@ -38,27 +38,26 @@ export class BooksService {
     const url = `${this.baseUrl}ProductReviews/GetBookReview?page=${page}&pageSize=${pageSize}`;
     return this.http.get<any>(url);
   }
-  // gọi bảng book
-  Books() {
-    return this.http.get<any>(`${this.baseUrl}Books`)
-  }
+  // // gọi bảng book
+  // Books() {
+  //   return this.http.get<any>(`${this.baseUrl}Books`)
+  // }
   // gọi theo id bảng book
-  BooksId(id: string) {
-    return this.http.get<any>(`${this.baseUrl}Books/${id}`);
-  }
+  // BooksId(id: string) {
+  //   return this.http.get<any>(`${this.baseUrl}Books/${id}`);
+  // }
   // Thêm mới sách
 
   postBook(bookData: any): Observable<any> {
     return this.http.post<any>(`https://localhost:7009/api/Books`, bookData);
   }
+// sửa sách
+updateBook(formData: FormData): Observable<any> {
+  return this.http.put<any>(`${this.baseUrl}Books`, formData);
+}
   // Xóa sách theo id
   deleteBookById(id: string){
-    return this.http.delete<any>(`${this.baseUrl}Bookdetails/${id}`);
-  }
-
-  // Cập nhật thông tin sách
-  updateBook(book: any) {
-    return this.http.put<any>(`${this.baseUrl}Bookdetails/${book.id}`, book);
+    return this.http.delete<any>(`${this.baseUrl}Books/${id}`);
   }
 
   countBook() {

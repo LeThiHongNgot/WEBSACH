@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project>
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAFkP2sQ4iy0agC1H39xXsCwAAAAACAAAAAAAQZgAAAAEAACAAAABP7WWESTdYKZNkabYutflfn26TDG/AVVL1SrBn7R6FlAAAAAAOgAAAAAIAACAAAAC92kdzRDsKr4ezfQiivkR2Dlo3whqTiqBhaW27IRCUnYAAAACtpvyf0+UAexZzmz/09QB64gZMGVbUzqoUVbOeOQwXbae+IIGJRk8tTRu8jpqHLvRDe/9PItYVkbDhbDahs3EW7YmshRdR2RUuD7mF0dTM0PXUZkNozHWMNkb2EzwpWyiCFw2IL1lVFr4yKESmHprsGxnnBuf5ihE0PtlntMhHuUAAAAAET0yVTFoQrE2JcDzf8BLRo5xvdo4t4pzu9QOJOSutZ5vWqUNr39Ngm1xlpUBPRIVa1e3aCWtxUjmODl+qQv69</EncryptedPassword>
+    <History>True|2024-07-11T13:46:05.2849557Z;True|2024-07-11T20:08:27.7677031+07:00;True|2024-07-11T19:34:39.9978552+07:00;False|2024-07-11T19:00:29.8899564+07:00;True|2024-07-11T18:36:58.2806377+07:00;False|2024-07-11T18:18:56.5606097+07:00;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="QLBANSACH">
+      <Value>Data Source=qlchsdbserver.database.windows.net,1433%3bInitial Catalog=QLCHS_db%3bUser ID=ngotle%3bPassword=%28Luom%291710%40</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+</Project>

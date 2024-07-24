@@ -1,46 +1,73 @@
 <footer>
-  <div class="footer-bottom"  >
-      <div class="contact-info">
-          <h3>LIÊN HỆ</h3>
-          <p>
-            <mat-icon class="mat-icon-map" >location_on</mat-icon>
-            578 Đường Nguyễn Duy, phường 10, Quận 8, Thành phố Hồ Chí Minh
-        </p>
+    <div class="footer-bottom">
+        <div class="contact-info">
+            <h3>LIÊN HỆ</h3>
+            <p>
+                <mat-icon class="mat-icon-map">location_on</mat-icon>
+                578 Đường Nguyễn Duy, phường 10, Quận 8, Thành phố Hồ Chí Minh
+            </p>
 
-        <app-map *ngIf="isMapModalVisible" (closeModalEvent)="isMapModalVisible = false"></app-map>
-        <!-- <span class="bold-text">Số điện thoại liên hệ:</span> -->
-        <p>
-            <mat-icon class="mat-icon"> phone</mat-icon>
-            0930 232 555
-        </p>
-        <!-- <span class="bold-text">Mail:</span> -->
-        <p>
-            <mat-icon>mail</mat-icon>
-            kanncskh@gmail.com
-        </p>
-          <div class="social-icons">
-              <button class="icon-btn"><img src="assets/footer/fb-icon.png" alt="Facebook Icon"></button>
-              <button class="icon-btn"><img src="assets/footer/ig-icon.png" alt="Instagram Icon"></button>
-              <button class="icon-btn"><img src="assets/footer/yt-icon.png" alt="YouTube Icon"></button>
-              <button class="icon-btn"><img src="assets/footer/tbl-icon.png" alt="Tumblr Icon"></button>
-              <button class="icon-btn"><img src="assets/footer/t-icon.png" alt="Twitter Icon"></button>
-              <button class="icon-btn"><img src="assets/footer/pr-icon.png" alt="Pinterest Icon"></button>
-          </div>
-      </div>
+            <app-map *ngIf="isMapModalVisible" (closeModalEvent)="isMapModalVisible = false"></app-map>
+            <!-- <span class="bold-text">Số điện thoại liên hệ:</span> -->
+            <p>
+                <mat-icon class="mat-icon"> phone</mat-icon>
+                0930 232 555
+            </p>
+            <!-- <span class="bold-text">Mail:</span> -->
+            <p>
+                <mat-icon>mail</mat-icon>
+                kanncskh@gmail.com
+            </p>
+            <div class="social-icons">
+                <button class="icon-btn"><img src="assets/footer/fb-icon.png" alt="Facebook Icon"></button>
+                <button class="icon-btn"><img src="assets/footer/ig-icon.png" alt="Instagram Icon"></button>
+                <button class="icon-btn"><img src="assets/footer/yt-icon.png" alt="YouTube Icon"></button>
+                <button class="icon-btn"><img src="assets/footer/tbl-icon.png" alt="Tumblr Icon"></button>
+                <button class="icon-btn"><img src="assets/footer/t-icon.png" alt="Twitter Icon"></button>
+                <button class="icon-btn"><img src="assets/footer/pr-icon.png" alt="Pinterest Icon"></button>
+            </div>
+        </div>
 
-      <div class="footer-left">
-          <div class="footer-logo">
-              <img src="assets/logo.png" alt="Logo" class="logo">
-          </div>
-          <!-- Signup Text -->
-          <p class="italic-text">Đăng ký nhận bảng tin từ KANN book store</p>
-          <!-- Email Input -->
-          <div class="email-input">
-              <input type="email" placeholder="Nhập mail của bạn...">
-          </div>
-      </div>
-      <div class="footer-right">
-          <img src="assets/footer/logopay.png" alt="Logo Bay" class="pay-logo">
-      </div>
-  </div>
+        <div class="footer-left">
+            <div class="footer-logo">
+                <img src="assets/logo.png" alt="Logo" class="logo">
+            </div>
+            <div id="mc_embed_shell">
+                <link href="//cdn-images.mailchimp.com/embedcode/classic-061523.css" rel="stylesheet" type="text/css">
+                <div id="mc_embed_signup">
+                    <form
+                        action="https://gmail.us13.list-manage.com/subscribe/post?u=d939932e39ca2422a1c770ff1&amp;id=281db119a6&amp;f_id=009b34e2f0"
+                        method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate"
+                        target="_blank">
+                        <div id="mc_embed_signup_scroll">
+                            <h4>Đăng kí để nhận bảng tin từ KANN BOOKSTORE</h4>
+                            <div class="indicates-required"><span class="asterisk">*</span> Bắt buộc</div>
+                            <div class="mc-field-group"><label for="mce-EMAIL">Nhập địa chỉ e-mail của bạn<span
+                                        class="asterisk">*</span></label><input type="email" name="EMAIL" class="required email"
+                                    id="mce-EMAIL" required="" value=""></div>
+                            <div id="mce-responses" class="clear foot">
+                                <div class="response" id="mce-error-response" style="display: none;"></div>
+                                <div class="response" id="mce-success-response" style="display: none;"></div>
+                            </div>
+                            <div aria-hidden="true" style="position: absolute; left: -5000px;">
+                                /* real people should not fill this in and expect good things - do not remove this or risk form bot
+                                signups */
+                                <input type="text" name="b_d939932e39ca2422a1c770ff1_281db119a6" tabindex="-1" value="">
+                            </div>
+                            <div class="optionalParent">
+                                <div class="clear foot">
+                                    <input type="submit" name="subscribe" id="mc-embedded-subscribe" class="button" value="Đăng kí">
+                                    <p style="margin: 0px;">
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="footer-right">
+            <img src="assets/footer/logopay.png" alt="Logo Bay" class="pay-logo">
+        </div>
+    </div>
 </footer>

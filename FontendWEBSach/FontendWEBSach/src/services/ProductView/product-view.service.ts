@@ -24,6 +24,7 @@ export class ProductViewService {
   }
   getProductReviewByBookId(id: string): Observable<ProductReviewBookid[]> {
     const url = `${this.apiUrl}/books/${id}`;
+    
     return this.http.get<ProductReviewBookid[]>(url);
   }
 

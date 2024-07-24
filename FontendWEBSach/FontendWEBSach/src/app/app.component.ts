@@ -21,44 +21,5 @@ export class AppComponent {
   filteredProducts: bookhome[] = [];
   categories: Category[] = [];
 
-  ngOnInit() {
-    // Make a GET request to fetch book data
-    this.http.get<bookhome[]>('https://localhost:7009/api/Books').subscribe({
-      next: response => {
-
-          this.data = response;
-
-      },
-      error: error => {
-        console.error('Lỗi xảy ra khi lấy dữ liệu sách', error);
-      }
-    });
-    this.http.get<bookimg[]>(`https://localhost:7009/api/Bookimgs?`).subscribe(
-      {
-        next: response => {
-          // Store the image in the bookImage object with the book ID as the key
-          if (response) {
-            this.bookImage = response;
-          }
-        },
-        error: error => {
-          console.error('Lỗi xảy ra khi lấy dữ liệu hình ảnh', error);
-        }
-      });
-    this.http.get<Category[]>(`https://localhost:7009/api/Categories?`).subscribe(
-      {
-        next: response => {
-          if(response) {
-            this.categories = response;
-          }
-        },
-        error: error => {
-          console.error('Lỗi xảy ra khi lấy dữ liệu thể loại', error);
-        }
-      });
-  }
-
  
-
-
 }

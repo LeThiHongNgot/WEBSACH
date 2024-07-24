@@ -1,8 +1,7 @@
 import {NestedTreeControl} from '@angular/cdk/tree';
 import {Component} from '@angular/core';
 import {MatTreeNestedDataSource, MatTreeModule} from '@angular/material/tree';
-import {MatIconModule} from '@angular/material/icon';
-import {MatButtonModule} from '@angular/material/button';
+import { Router } from '@angular/router';
 
 interface FoodNode {
   name: string;
@@ -38,9 +37,15 @@ export class MenuComponent {
   treeControl = new NestedTreeControl<FoodNode>(node => node.children);
   dataSource = new MatTreeNestedDataSource<FoodNode>();
 
-  constructor() {
+  constructor(private router:Router) {
     this.dataSource.data = TREE_DATA;
   }
-
   hasChild = (_: number, node: FoodNode) => !!node.children && node.children.length > 0;
+
+  logout()
+{
+  localStorage.removeItem('user_token');
+  alert('Đăng xuất thành công')
+  this.router.navigate(['admin'])
+}
 }

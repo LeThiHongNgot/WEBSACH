@@ -1,0 +1,23 @@
+<div class="modal-overlay" (click)="closeModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+      <div class="name-content">
+           Thêm Thể Loại
+      </div>
+      <hr>
+      <div class="bookname-add">
+          <label>Mã loại sách </label>
+          <input type="text" [(ngModel)]="categoryData.id" disabled>
+      </div>
+      <div class="bookname-add">
+          <label>Loại sách</label>
+          <input type="text"  [(ngModel)]="categoryData.name" >
+      </div>
+    
+  
+      <div class="btn-cancel-apply">
+          <button mat-raised-button (click)="closeModal()">HUỶ</button>
+          <button mat-raised-button (click)="addCategory()">THÊM LOẠI SÁCH</button>
+      </div>
+    </div>
+
+</div>

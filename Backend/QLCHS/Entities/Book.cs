@@ -22,8 +22,8 @@ namespace QLCHS.Entities
         public bool? Available { get; set; }
         public int? Quantity { get; set; }
 
-        public virtual Author? Author { get; set; }
-        public virtual Supplier? Supplier { get; set; }
+        public virtual Author Author { get; set; } = null!;
+        public virtual Supplier Supplier { get; set; } = null!;
         public virtual Bookdetail? Bookdetail { get; set; }
         public virtual Bookimg? Bookimg { get; set; }
         public virtual ICollection<Cart> Carts { get; set; }

@@ -38,7 +38,6 @@ export class UserAdminComponent {
       // If no search term or an empty search term, show all books
       this.filterdCustomers = this.Customers.slice(0, 25); // Or simply assign this.filteredBooks = this.Books; for all books
     }
-    console.log(this.filterdCustomers)
   }
 
   assets: any;

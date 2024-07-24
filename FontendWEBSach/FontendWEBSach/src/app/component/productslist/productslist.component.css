@@ -1,0 +1,113 @@
+.product-relatedproduct-bottom {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+  padding: 0 30px;
+  margin-top: 20px;
+  box-sizing: border-box;
+  font-family: Gill Sans, sans-serif;
+}
+
+.cartegory-right-bottom-item {
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.cartegory-right-bottom-item:hover {
+  transform: scale(1.03);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+}
+
+.cartegory-right-bottom-item p {
+  font-size: 15px;
+  padding: 0 12px;
+  text-align: left;
+}
+
+.cartegory-right-bottom-item h1 {
+  font-size: 18px;
+  color: #777;
+  padding: 5px 12px;
+  text-align: left;
+
+  display: block;
+  display: -webkit-box;
+  line-height: 1.5;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-clamp: 1;
+}
+
+.cartegory-right-bottom-item img {
+  position: relative;
+  width: 50%;
+  object-fit: contain;
+  transition: all 0.5s ease-in-out;
+}
+
+.productIMG {
+  height: 60%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.productIMG img {
+  position: relative;
+  max-width: 60%;
+  max-height: 100%;
+  object-fit: contain;
+  transition: all 0.5s ease-in-out;
+}
+
+.product-right-price{
+  height: 15%;
+}
+.product-right-price > p {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+  color: #C92127;
+}
+
+.gg {
+  display: flex;
+  font-size: 15px;
+}
+
+.gg p:nth-child(1) {
+  text-decoration: line-through;
+  color: #6e6e6d;
+  padding-right: 10px;
+}
+
+.gg p:nth-child(2) {
+  color: #fff;
+  border-radius: 5px;
+  background-color: #C92127;
+  padding: 0 5px;
+  font-weight: bold;
+}
+
+/* ******** */
+.see-more-container {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  z-index: 0;
+}
+
+.product-rating {
+  margin-bottom: 20px;
+}

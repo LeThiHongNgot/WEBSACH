@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { forkJoin, Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { formatDate } from '@angular/common';
 import { bookimg } from '../../../interfaces/bookimg';
 import { Author } from '../../../interfaces/Author';
 import { Category } from '../../../interfaces/Category';
@@ -10,7 +9,6 @@ import { BookDetail } from '../../../interfaces/bookdetail';
 import { Supplier } from '../../../interfaces/Supplier';
 import { Router } from '@angular/router';
 import { BooksService } from 'src/services/Books/books.service';
-import { BookDetailsService } from 'src/services/BookDetails/bookdetails.service';
 import { NgbRatingConfig, NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
@@ -55,13 +53,15 @@ export class ProductComponent implements OnInit {
   quantity: { [key: string]: number} = {};
   checkedProductIds: string[] = [];
   productsPrice: { [id: string]: number} = {};
-  quantityfirst:number=0;
+  quantityfirst:number=1;
+  maxquantity: number = 0;
+  productId: string | null = null;
+  productName:string| null=null;
   constructor(
     private route: ActivatedRoute,
     private router: Router, private books: BooksService,
     private cartsService:CartsService,
     private customer: CustomerService,
-    private bookdetailService:BookDetailsService,
     private productView:ProductViewService,
     private sharedata:SharedataService,
     //rating-comment
@@ -69,10 +69,7 @@ export class ProductComponent implements OnInit {
 		private modalService: NgbModal,
     ) {
       config.backdrop = 'static';
-		  config.keyboard = false;
-      this.onPageChange(this.page);
-      this.getproductid()
-      this.sameCategory(1)
+      config.keyboard = false;
     }
     //modal-rating
    open(content:any)
@@ -94,25 +91,40 @@ export class ProductComponent implements OnInit {
     this.selectedImage = imageUrl;
   }
   ngOnInit(): void {
-    const productId= this.route.snapshot.paramMap.get('id')||'';
-    this.getProductReviewaAverag(productId)
-    this.getRatingStatistical()
-    console.log(this.totalVotes)
+    this.route.paramMap.subscribe(params => {
+      const combinedParam = params.get('combinedParam');
+      if (combinedParam) {
+        const lastDashIndex = combinedParam.lastIndexOf('-');
+        this.productId = combinedParam.substring(lastDashIndex + 1);
+        this.productName = combinedParam.substring(0, lastDashIndex);
+        // Sử dụng productId để tải thông tin sản phẩm
+        if (this.productId) {
+          this.getproductid();
+          this.getProductReviewaAverag(this.productId);
+          this.onPageChange(this.page);
+          this.sameCategory(1);
+          this.quantity = {}; 
+          this.checkedProductIds = [];
+          this.selectedImage='';
+          this.productsPrice={}
+        }
+      }
+    });
   }
+
 getproductid()
 {
-  const productId= this.route.snapshot.paramMap.get('id')||'';
-  this.addproductID=productId;
-    if (productId) {
-        this.books.getBookDetailsWithImagesid(productId).subscribe({
+    if (this.productId) {
+        this.books.getBookDetailsWithImagesid(this.productId).subscribe({
           next:(res)=>
           {
             console.log('API Response:', res);
             this.productful = res;
             this.idCategory = res.catergoryID;
             this.productsPrice[res.bookId]=(1-res.pricePercent)*res.unitPrice;
+            this.maxquantity = res.quantity ?? 0;
+            console.log(this.maxquantity)
             this.checkedProductIds.push(res.bookId);
-            this.quantityfirst=res.quantity??0
             this.sameCategory(1);
             this.getProductView();
           },
@@ -125,17 +137,19 @@ getproductid()
 }
 getRatingStatistical()
 {
-  const productId= this.route.snapshot.paramMap.get('id')||'';
-  this.productView.getProductReviewRatingBookId(productId).subscribe({
-    next: (response) => {
-      this.ratingStatistical=response
-      console.log(this.ratingStatistical)
-      this.totalVotes = this.calculateTotalVotesRatingAcount(this.ratingStatistical);
-    },
-    error: (error: any) => {
-      console.error('', error);
-    }
-  });
+  if(this.productId)
+  {
+    this.productView.getProductReviewRatingBookId(this.productId).subscribe({
+      next: (response) => {
+        this.ratingStatistical=response
+        console.log(this.ratingStatistical)
+        this.totalVotes = this.calculateTotalVotesRatingAcount(this.ratingStatistical);
+      },
+      error: (error: any) => {
+        console.error('', error);
+      }
+    });
+  }
 }
 sameCategory(page: number = 1) {
   this.books.getBookdetailsByCategory(this.idCategory, page, this.pageSize)
@@ -182,10 +196,10 @@ getAvergaProductRating(productId: string): Observable<number | null> {
 addCart()
 {
   this.idcustomer=this.customer.getClaimValue();
- console.log( this.addproductID+this.idcustomer)
+ console.log( this.productId+this.idcustomer)
   const dataCart={
-    id: this.addproductID+this.idcustomer,
-    bookId:this.addproductID ,
+    id: this.productId+this.idcustomer,
+    bookId:this.productId ,
     customerId: this.idcustomer,
   }
     this.cartsService.addCarts(dataCart).subscribe({
@@ -198,15 +212,18 @@ addCart()
     });
 }
 getProductView()
-{ const productId= this.route.snapshot.paramMap.get('id')||'';
-  this.productView.getProductReviewByBookId(productId).subscribe({
-    next: (response) => {
-      this.productViewinterface=response
-    },
-    error: (error: any) => {
-      console.error('Error loading books:', error);
-    }
-  });
+{
+  if(this.productId)
+  {
+    this.productView.getProductReviewByBookId(this.productId).subscribe({
+      next: (response) => {
+        this.productViewinterface=response
+      },
+      error: (error: any) => {
+        console.error('Error loading books:', error);
+      }
+    });
+  }
 }
 getProductReviewaAverag(productId:string)
 {
@@ -224,9 +241,9 @@ portratingcommen()
   this.idcustomer=this.customer.getClaimValue();
   const dataProductView=
   {
-    id:this.addproductID+ this.idcustomer,
+    id:this.productId+ this.idcustomer,
     customerId: this.idcustomer,
-    bookId: this.addproductID,
+    bookId: this.productId,
     rating: this.commemtrating.rating || 5, // Provide a default value if rating is undefined
     comment: this.commemtrating.comment || '',
     ngayCommemt: new Date(),
@@ -234,9 +251,11 @@ portratingcommen()
   }
   this.productView.addProductReview(dataProductView).subscribe({
     next: (res) => {
-      const productId= this.route.snapshot.paramMap.get('id')||'';
       this.getProductView()
-      this.getProductReviewaAverag(productId);
+      if(this.productId)
+      {
+      this.getProductReviewaAverag(this.productId);
+      }
       this.getRatingStatistical();
       this.sameCategory()
      alert('Bình luận thành công');
@@ -246,64 +265,59 @@ portratingcommen()
     },
   });
 }
-// -----------------------------Định dạng ngày khi load lên
-formatDate(dateString: string): string {
-
-  return formatDate(dateString, 'dd/MM/yyyy', 'en-US');
-}
 //-------------------------------thay đôi số page khi chuyển trang
 onPageChange(newPage: number): void {
   this.page = newPage;
    this.sameCategory(this.page);
 }
 
-  percent1(price: number, per: number): number {
-    return price *(1- per) ;}
-  percent2(per:number)
-  {
-      return '-'+per*100+'%';
-  }
-  navigateToProduct(productId: string) {
-    // Loại bỏ dấu cách và khoảng trắng khỏi productId
-    const sanitizedProductId = productId.replace(/\s+/g, ''); // Loại bỏ dấu cách và khoảng trắng
-    // Truyền productId đã được loại bỏ dấu cách vào route "product"
-    this.router.navigate(['product', sanitizedProductId]).then(() => {
+percent1(price: number, per: number): number { return price *(1- per) ;}
 
-      location.reload();
-    });
-  }
-  updateQuantity(bookId: string,  newQuantity: number | undefined): void {
+percent2(per:number){ return '-'+per*100+'%'; }
+
+navigateToProduct(productId: string, productName: string) {
+  const sanitizedProductName = productName.replace(/\s+/g, '-');
+  const combined = `${sanitizedProductName}-${productId}`;
+  this.router.navigate(['product', combined]);
+  
+
+
+}
+updateQuantity(bookId: string,  newQuantity: number | undefined): void {
     this.quantity[bookId] = parseInt(newQuantity?.toString() ?? '0', 10);
-    console.log(this.quantity[bookId]);
-
-  }
-  calculateTotalVotesRatingAcount(ratingStatistical: any[]): number {
+}
+calculateTotalVotesRatingAcount(ratingStatistical: any[]): number {
     return ratingStatistical.reduce((total, item) => total + item.count, 0);
-  }
-  onRatingChange(selectedRating: number) {
+}
+onRatingChange(selectedRating: number) {
     this.commemtrating.rating=selectedRating
-  }
-  payment()
-  {
-    const productId= this.route.snapshot.paramMap.get('id')||'';
-    if(this.quantity[productId]==null)
-    {
-      this.quantity[productId]=this.quantityfirst??0;
+}
+payment() {
+  if (this.productId) {
+    // Nếu chưa có số lượng, gán giá trị mặc định
+    if (this.quantity[this.productId] == null) {
+      this.quantity[this.productId] = this.quantityfirst ?? 0;
     }
 
-    console.log(this.checkedProductIds)
-    console.log(this.checkedProductIds)
-    this.sharedata.setCheckedProductIds(this.checkedProductIds);
-    this.sharedata.setProductsPrice(this.productsPrice);
-    this.sharedata.setQuantity(this.quantity);
-    if(this.quantity[productId]!=0)
-    {
-      this.router.navigate(['payment']);
-    }else
-    {
-      alert('Vui lòng chọn số lượng')
-    }
+    // Tạo một khóa duy nhất (ví dụ sử dụng thời gian hiện tại)
+    const uniqueKey = `payment_${new Date().getTime()}`;
 
+    // Lưu trữ dữ liệu vào sessionStorage
+    sessionStorage.setItem(`${uniqueKey}_checkedProductIds`, JSON.stringify(this.checkedProductIds));
+    sessionStorage.setItem(`${uniqueKey}_productsPrice`, JSON.stringify(this.productsPrice));
+    sessionStorage.setItem(`${uniqueKey}_quantity`, JSON.stringify(this.quantity));
+
+    // Điều hướng với khóa duy nhất trong queryParams
+    if (this.quantity[this.productId] != 0) {
+      this.router.navigate(['payment'], {
+        queryParams: { sessionKey: uniqueKey }
+      });
+    } else {
+      alert('Vui lòng chọn số lượng');
+    }
   }
+}
+
+
 }
 
